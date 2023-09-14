@@ -1,0 +1,2492 @@
+openapi: "3.0.0"
+info:
+    version: "1.0.0"
+    title: "delta API"
+    description: "Universal API for ecommerce"
+    contact:
+        name: Delta Support
+        email: support@usedelta.io
+        url: https://www.usedelta.io
+servers:
+    - url: https://api.usedelta.io/v1
+      description: production environment
+    - url: https://staging.api.usedelta.io/v1
+      description: staging environment
+tags:
+    - name: Inventory
+      description: Provides the inventory information
+    - name: Location
+      description: Provides the location information
+    - name: Orders
+      description: Provides the orders information
+    - name: Products
+      description: Provides the products information
+    - name: Returns
+      description: Provides the returns information
+    - name: Transactions
+      description: Provides the transactions information
+    - name: Accounts
+      description: Provides the accounts information
+    - name: Journal Entries
+      description: Provides the journal entries information
+    - name: Fulfillments
+      description: Provides the fulfillments information
+paths:
+    /orders:
+        get:
+            description: Get all orders
+            operationId: getOrders
+            tags:
+                - Orders
+            summary: Get all orders
+            parameters:
+              - in: header
+                name: Platform-Key
+                schema:
+                  type: string
+              - name: from
+                in: query
+                description: Start date for order filtering in the format YYYY-MM-DD. Orders updated from this date will be returned.
+                required: false
+                schema:
+                  type: string
+                  format: date
+              - name: to
+                in: query
+                description: End date for the orders filtering in the format YYYY-MM-DD. Orders updated before this date will be returned. If not provided, defaults to the current date.
+                required: false
+                schema:
+                  type: string
+                  format: date
+              - name: next
+                in: query
+                description: The next page number for pagination
+                required: false
+                schema:
+                    type: integer
+                    minimum: 1
+              - name: first
+                in: query
+                description: The first page number for pagination
+                required: false
+                schema:
+                    type: integer
+                    minimum: 1
+            responses:
+                "200":
+                    description: The orders corresponding to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/OrderCollection"
+                "404":
+                    description: No orders found for the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+        post:
+            description: Create a new order
+            operationId: postOrders
+            tags:
+                - Orders
+            summary: Create a new order
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/OrderWithoutId'
+            responses:
+                "201":
+                    description: Order created successfully to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Order"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /orders/{orderId}:
+        parameters:
+            - name: orderId
+              description: The unique identifier of the order
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/OrderId"
+        get:
+            description: Get a specific order
+            operationId: getOrderById
+            tags:
+                - Orders
+            summary: Get an order by id
+            responses:
+                "200":
+                    description: The order corresponding to the provided `orderId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Order"
+                "404":
+                    description: No order found for the provided `orderId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+        patch:
+            description: Update a specific order
+            operationId: patchtOrders
+            tags:
+                - Orders
+            summary: Update a specific order
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/OrderWithoutId'
+            responses:
+                "201":
+                    description: Order updated successfully to the provided `Platform-Key` and `orderId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Order"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /products:
+        get:
+            description: Get all products
+            operationId: getProducts
+            tags:
+                - Products
+            summary: Get all products
+            responses:
+                "200":
+                    description: The producst corresponding to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Product"
+                "404":
+                    description: No products found for the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+        post:
+            description: Create a new product
+            operationId: postProducts
+            tags:
+                - Products
+            summary: Create a new product
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductWithoutId'
+            responses:
+                "201":
+                    description: Product created successfully to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Product"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /products/{productId}:
+        parameters:
+            - name: productId
+              description: The unique identifier of the product
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/ProductId"
+        get:
+            description: Get a specific product 
+            operationId: getProductById
+            tags:
+                - Products
+            summary: Get a specific product
+            responses:
+                "200":
+                    description: The product corresponding to the provided `productId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Product"
+                "404":
+                    description: No order found for the provided `productId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /inventories:
+        get:
+            description: Get all inventories 
+            operationId: getInvetory
+            tags:
+                - Inventory
+            summary: Get all inventories
+            responses:
+                "200":
+                    description: The inventories corresponding to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Inventory"
+                "404":
+                    description: No inventory found for the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /inventories/set:
+        post:
+            description: Update the stock level of an inventory item at a location.
+            operationId: postSetInventories
+            tags:
+                - Inventory
+            summary: Update the stock level of an inventory item at a location
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/InventorySet'
+            responses:
+                "201":
+                    description: Inventory seted successfully to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Inventory"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /inventories/{inventoryId}:
+        parameters:
+            - name: inventoryId
+              description: The unique identifier of the inventory
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/InventoryId"
+        get:
+            description: Get a specific inventory
+            operationId: getInvetoryById
+            tags:
+                - Inventory
+            summary: Get a specific inventory
+            responses:
+                "200":
+                    description: The inventory corresponding to the provided `inventoryId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Inventory"
+                "404":
+                    description: No inventory found for the provided `inventoryId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /inventories/locations:
+        # get:
+        #     description: Get all locations
+        #     operationId: getLocation
+        #     tags:
+        #         - Location
+        #     summary: Get all locations
+        #     responses:
+        #         "200":
+        #             description: The location corresponding to the provided `Platform-Key`
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Location"
+        #         "404":
+        #             description: No inventory found for the provided `Platform-Key`
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        #         "500":
+        #             description: Unexpected error
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        #         "502":
+        #             description: Bad Gateway
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        post:
+            description: Create a new location
+            operationId: postLocation
+            tags:
+                - Location
+            summary: Create a new location
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Location'
+            responses:
+                "201":
+                    description: Location created successfully to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Location"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /inventories/locations/{location_id}:
+        parameters:
+            - name: location_id
+              description: The unique identifier of the location
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/LocationId"
+        get:
+            description: Get a specific location
+            operationId: getLocationById
+            tags:
+                - Location
+            summary: Get a specific location
+            responses:
+                "200":
+                    description: The inventory corresponding to the provided `locationId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Location"
+                "404":
+                    description: No inventory found for the provided `locationId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /orders/returns:
+        # get:
+        #     description: Get all returns
+        #     operationId: getReturns
+        #     tags:
+        #         - Returns
+        #     summary: Get all returns
+        #     responses:
+        #         "200":
+        #             description: The returns corresponding to the provided `Platform-Key`
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Return"
+        #         "404":
+        #             description: No returns found for the provided `Platform-Key`
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        #         "500":
+        #             description: Unexpected error
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        #         "502":
+        #             description: Bad Gateway
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        post:
+            description: Create a new return
+            operationId: postReturns
+            tags:
+                - Returns
+            summary: Create a new return
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReturnWithoutId'
+            responses:
+                "201":
+                    description: Return created successfully to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Return"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /orders/returns/{returnId}:
+        parameters:
+            - name: returnId
+              description: The unique identifier of the return
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/ReturnId"
+        get:
+            description: Get a specific return
+            operationId: getReturnById
+            tags:
+                - Returns
+            summary: Get a specific return
+            responses:
+                "200":
+                    description: The return corresponding to the provided `returnId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Return"
+                "404":
+                    description: No return found for the provided `returnId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /transactions:
+        get:
+            description: Get all transactions
+            operationId: getTransactions
+            tags:
+                - Transactions
+            summary: Get all transactions
+            responses:
+                "200":
+                    description: The transactions corresponding to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Transaction"
+                "404":
+                    description: No returns found for the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /transactions/{transactionId}:
+        parameters:
+            - name: transactionId
+              description: Get a specific transaction
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/TransactionId"
+        get:
+            description: Get a specific transaction
+            operationId: getTransactionById
+            tags:
+                - Transactions
+            summary: Provide a transaction by id
+            responses:
+                "200":
+                    description: The transaction corresponding to the provided `transactionId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Transaction"
+                "404":
+                    description: No transaction found for the provided `transactionId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /accounts:
+        parameters:
+            - in: header
+              name: Platform-Key
+              schema:
+                type: string
+        get:
+            description: Get all accounts
+            operationId: getAccounts
+            tags:
+                - Accounts
+            summary: Get all accounts
+            responses:
+                "200":
+                    description: The account corresponding to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccountCollection"
+                "404":
+                    description: No accounts found for the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /accounts/{accountId}:
+        parameters:
+            - name: accountId
+              description: The unique identifier of the account
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/AccountId"
+        get:
+            description: Get a specific account
+            operationId: getAccountById
+            tags:
+                - Accounts
+            summary: Get a specific account
+            responses:
+                "200":
+                    description: The account corresponding to the provided `accountId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Account"
+                "404":
+                    description: No account found for the provided `accountId`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /journalentries:
+        get:
+            description: Get all journal entries
+            operationId: getJournalEntries
+            tags:
+                - Journal Entries
+            summary: Get all journal entries
+            responses:
+                "200":
+                    description: The journal entries corresponding to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/JournalEntry"
+                "404":
+                    description: No journal entries found for the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /journalentries/{id}:
+        parameters:
+            - name: id
+              description: The unique identifier of the journal entry
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/JournalEntryId"
+        get:
+            description: Get a specific journal entry
+            operationId: getJournalEntryById
+            tags:
+                - Journal Entries
+            summary: Get a specific journal entry
+            responses:
+                "200":
+                    description: The journal entry corresponding to the provided `id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/JournalEntry"
+                "404":
+                    description: No journal entry found for the provided `id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /orders/fulfillments:
+        # get:
+        #     description: Get all fulfillments
+        #     operationId: getFullfillments
+        #     tags:
+        #         - Fulfillments
+        #     summary: Get all fulfillments
+        #     responses:
+        #         "200":
+        #             description: The fulfillments corresponding to the provided `Platform-Key`
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Fulfillment"
+        #         "404":
+        #             description: No fulfillment entries found for the provided `Platform-Key`
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        #         "500":
+        #             description: Unexpected error
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        #         "502":
+        #             description: Bad Gateway
+        #             content:
+        #                 application/json:
+        #                     schema:
+        #                         $ref: "#/components/schemas/Error"
+        post:
+            description: Create a new fulfillment
+            operationId: postFulfillments
+            tags:
+                - Fulfillments
+            summary: Create a new fulfillment
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Fulfillment'
+            responses:
+                "201":
+                    description: Fulfillment created successfully to the provided `Platform-Key`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Fulfillment"
+                "400":
+                    description: Bad request - Invalid or incomplete data 
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "401":
+                    description: Unauthorized Access
+                "403":
+                    description: Forbidden Action
+                '409':
+                    description: Conflict - Duplicate key constraint violation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+    /orders/fulfillments/{id}:
+        parameters:
+            - name: id
+              description: Fulfillment id in delta
+              in: path
+              required: true
+              schema:
+                  $ref: "#/components/schemas/FulfillmentId"
+        get:
+            description: Get a specific fulfillment
+            operationId: getFulfillmentById
+            tags:
+                - Fulfillments
+            summary: Get a specific fulfillment
+            responses:
+                "200":
+                    description: The fulfillment corresponding to the provided `id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Fulfillment"
+                "404":
+                    description: No fulfillment found for the provided `id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "500":
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+                "502":
+                    description: Bad Gateway
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+components:
+    schemas:
+        OrderCollection:
+            type: object
+            properties:
+                orders:
+                    type: array
+                    items: 
+                        $ref: "#/components/schemas/Order"
+        OrderId:
+            description: The unique identifier of the order
+            type: string
+        Order:
+            type: object
+            required: 
+                - id
+            properties:
+                id: 
+                    $ref: "#/components/schemas/OrderId"
+                connection_id:
+                    type: string
+                    description: Unique identifier of the integration on delta.
+                platform:
+                    type: string
+                    description: Name of the connected platform.
+                channel:
+                    type: string
+                    description: Name of the channel on the platform.
+                platform_id:
+                    type: string
+                    description: The platform-specific ID of the order. 
+                channel_id:
+                    type: string
+                    description: The channel-specific ID of the order. 
+                order_number:
+                    type: string
+                    description: The readable human order id on the connected platform.
+                status:
+                    type: string
+                    description: Status of the order on the connected platform.
+                    enum:
+                        - OPEN
+                        - CLOSED
+                        - CANCELLED
+                payment_status:
+                    type: string
+                    description: Payment status of the order on the connected platform.
+                    enum:
+                        - PAYED
+                        - NOT_PAYED
+                        - LOST
+                fulfillment_status:
+                    type: string
+                    description: Fulfillment status of the order on the connected platform, can be one of
+                        - NULL None of the line items in the order have been fulfilled.
+                        - FULFILLED Every line item in the order has been fulfilled.
+                        - PARTIALLY At least one line item in the order has been fulfilled.
+                        - RETURNED Every line item in the order has been returned and the order canceled.
+                    enum:
+                        - 'NULL'
+                        - FULFILLED
+                        - PARTIALLY
+                        - RETURNED
+                total_order_discount:
+                    type: number
+                    description: The cumulated discounts applied to the total price.
+                discount_codes:
+                    type: string
+                    description: The discount codes used in the order.
+                subtotal_price:
+                    type: number
+                    description: The total price of the order before taxes.
+                total_price:
+                    type: number
+                    description: The total price of the order.
+                total_shipping:
+                    type: number
+                    description: The total shipping cost of the order.
+                total_shipping_discount:
+                    type: number
+                    description: The cumulated shipping discounts of the order.
+                total_tax:
+                    type: number
+                    description: The total taxes associated with the order.
+                tax_rate:
+                    type: number
+                    description: The tax rate for the order.
+                iso_currency_code:
+                    type: string
+                    description: The currency of the order. (ISO 4217).
+                payment_method:
+                    type: string
+                    description: The payment method used for the order.
+                invoice_number:
+                    type: string
+                    description: The number of the invoice associated with the order.
+                invoice_date:
+                    type: string
+                    description: The date of the invoice associated with the order.
+                billing_address:
+                    type: object
+                    description: Billing address for the order
+                    properties:
+                        first_name:
+                            type: string
+                            description: The first name of the customer.
+                        last_name:
+                            type: string
+                            description: The last name of the customer.
+                        address1:
+                            type: string
+                            description: The first address line of the address.
+                        address2:
+                            type: string
+                            description: The second address line of the address.
+                        company_name:
+                            type: string
+                            description: The company name of the customer.
+                        postal_code:
+                            type: string
+                            description: The postal code of the address. 
+                        city:
+                            type: string
+                            description: The city of the address.
+                        region:
+                            type: string
+                            description: the region of the address.
+                        country_code:
+                            type: string
+                            description: The country of the address (ISO 3166-1).
+                        email:
+                            type: string
+                            description: The email address of the customer.
+                        phone:
+                            type: string
+                            description: The phone number of the customer.
+                        tax_type:
+                            type: string
+                            description: The tax type for the customer. Only for B2B orders.
+                        tax_id:
+                            type: string
+                            description: The tax ID of the customer. Only for B2B orders.
+                shipping_address:
+                    type: object
+                    description: Billing address for the order
+                    properties:
+                        first_name:
+                            type: string
+                            description: The first name of the customer.
+                        last_name:
+                            type: string
+                            description: The last name of the customer.
+                        address1:
+                            type: string
+                            description: The first address line of the address.
+                        address2:
+                            type: string
+                            description: The second address line of the address.
+                        company_name:
+                            type: string
+                            description: The company name of the customer.
+                        postal_code:
+                            type: string
+                            description: The postal code of the address. 
+                        city:
+                            type: string
+                            description: The city of the address.
+                        region:
+                            type: string
+                            description: the region of the address.
+                        country_code:
+                            type: string
+                            description: The country of the address (ISO 3166-1).
+                        email:
+                            type: string
+                            description: The email address of the customer.
+                        phone:
+                            type: string
+                            description: The phone number of the customer.
+                line_items:
+                    type: array
+                    description: Items of the order
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: number
+                                description: Unique identifier of the line item within delta. 
+                            platform_id:
+                                type: string
+                                description: The platform-specific ID of the product. 
+                            variant_id:
+                                type: string
+                                description: The platform-specific ID of the variant. Equals platform_id if the product has no variants.
+                            barcode:
+                                type: string
+                                description: The barcode for the item.
+                            sku:
+                                type: string
+                                description: The SKU of the item.
+                            name:
+                                type: string
+                                description: The name of the item.
+                            fulfillment_status:
+                                type: string
+                                description: The fulfillment status of the order line item on the connected platform.
+                            serial_number:
+                                type: string
+                                description: The serial number of the item.
+                            requires_shipping:
+                                type: boolean
+                                description: Boolean flag whether the item requires shipping.
+                            weight:
+                                type: number
+                                description: The weight of the item.
+                            unit_weight:
+                                type: string
+                                description: The unit of the weight of the item.
+                            quantity:
+                                type: number
+                                description: The quantity of sold items of the variant.
+                            total_discount:
+                                type: number
+                                description: The total discount applied to the sold items of the variant.
+                            subtotal_price:
+                                type: number
+                                description: The total price of the sold items of the variant before taxes.
+                            total_price:
+                                type: number
+                                description: The total price of the sold items of the variant.
+                            tax_rate:
+                                type: number
+                                description: The tax rate for the line item. 
+                            total_tax:
+                                type: number
+                                description: The total taxes associated with the line item.
+                            unit_cost:
+                                type: number
+                                description: The unit cost of the item.
+                            iso_currency_code:
+                                type: string
+                                description: The currency of the item. (ISO 4217).
+                            delivery_time:
+                                type: number
+                                description: The delivery time of the item in business days.
+                            country_of_origin:
+                                type: string
+                                description: The country of origin of the item. (ISO 3166-1)
+                            inventory:
+                                type: object
+                                description: Inventory.
+                            created_at:
+                                type: string
+                                description: Creation date of the line item.
+                            updated_at:
+                                type: string
+                                description: Updated date of the line item.
+                total_weight:
+                    type: number
+                    description: The sum of all line item weights.
+                unit_weight:
+                    type: string
+                    description: The unit of the combined line item weights.
+                created_at:
+                    type: string
+                    description: Creation date of the order on the integration platform.
+                updated_at:
+                    type: string
+                    description: Updated date of the order in delta.
+                fulfillments:
+                    type: array
+                    description: Fulfillments of the order
+                    items:
+                        $ref: "#/components/schemas/Fulfillment"
+            example:
+                id: 39bdccd1-acb3-4b8f-8784-d6735a95ad86
+                connection_id: 0e61060d-87a9-4d53-8545-e46e2dd783fa
+                platform: TRADEBYTE
+                channel: ZALANDO_DE
+                platform_id: 456a
+                channel_id: '30'
+                order_number: '1023'
+                status: APPROVED
+                payment_status: PAYED
+                fulfillment_status: UNFILFILLED
+                total_order_discount: 0
+                discount_codes: ''
+                subtotal_price: 1079
+                total_price: 1099
+                total_shipping: 0
+                total_shipping_discount: 0
+                total_tax: 20 
+                tax_rate: 1.9
+                iso_currency_code: EUR
+                payment_method: invoice
+                invoice_number: 'A-1234'
+                invoice_date: 2023-02-09T00:00:00.000Z
+                billing_address: 
+                    first_name: Mia
+                    last_name: Musterer
+                    address1: Bahnhofsplatz 8
+                    address2: c/o Test SE
+                    company_name: Acme Inc
+                    postal_code: '91522'
+                    city: Ansbach
+                    region: Bavaria
+                    country_code: DE
+                    email: pp-cc-kam+3240+10103200471234@test.de,
+                    phone: 0152-890938
+                    tax_type: VAT
+                    tax_id: DE123456789
+                shippingAddress: 
+                    first_name: Mia
+                    last_name: Musterer
+                    address1: Bahnhofsplatz 8
+                    address2: c/o Test SE
+                    company_name: Acme Inc
+                    postal_code: 91522
+                    city: Ansbach
+                    region: Bayern
+                    country_code: DE
+                    email: pp-cc-kam+3240+10103200471234@test.de
+                    phone: 0187-9883755
+                line_items:
+                    - id: 53
+                      platform_id: a2235
+                      variant_id: z8889
+                      barcode: '5901234123457'
+                      sku: '1234'
+                      name: mug
+                      fulfillment_status: UNFILFILLED
+                      serial_number: '1234'
+                      requires_shipping: true
+                      weight: 1000
+                      unit_weight: g
+                      quantity: 1
+                      total_discount: 1050
+                      subtotal_price: 19300
+                      total_price: 19300
+                      tax_rate: 1.9
+                      total_tax: 20  
+                      unit_cost: 1420
+                      iso_currency_code: EUR
+                      delivery_time: 1
+                      country_of_origin: DE
+                      created_at: 2023-02-09T00:00:00.000Z
+                      updated_at: 2023-02-09T00:00:00.000Z
+                total_weight: 1000
+                unit_weight: g
+                created_at: 2023-02-09T00:00:00.000Z
+                updated_at: 2023-02-09T00:00:00.000Z
+                fulfillments:
+                    - id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                      carrier: express ship
+                      delivery_type: express
+                      tracking_number: "782833755"
+                      tracking_url: http://express-ship.com/782833755
+                      return_tracking_number: "782833755"
+                      return_tracking_url: http://express-ship.com/782833755
+                      shipping: 2522
+                      iso_currency_code: EUR
+                      orders:
+                          - platform_id: 456a
+                      line_items:
+                          - platform_id: a2235
+                            quantity: "2"
+                          - platform_id: b23234
+                      quantity: "5"
+                      parcels: 1
+                      weight: 1000
+                      unit_weight: g
+                      shipped_at: 2023-02-09T00:00:00.000Z
+                      created_at:  2023-02-09T00:00:00.000Z
+                      updated_at: 2023-02-09T00:00:00.000Z
+        OrderWithoutId:
+            allOf:
+                - $ref: '#/components/schemas/Order'
+                - type: object
+                  properties:
+                    id:
+                      type: number
+                      nullable: true
+                      required: ['']
+            example:
+                id: 39bdccd1-acb3-4b8f-8784-d6735a95ad86
+                connection_id: 0e61060d-87a9-4d53-8545-e46e2dd783fa
+                platform: TRADEBYTE
+                channel: ZALANDO_DE
+                platform_id: 456a
+                channel_id: '30'
+                order_number: '1023'
+                status: APPROVED
+                payment_status: PAYED
+                fulfillment_status: UNFILFILLED
+                total_order_discount: 0
+                discount_codes: ''
+                subtotal_price: 1079
+                total_price: 1099
+                total_shipping: 0
+                total_shipping_discount: 0
+                total_tax: 20 
+                tax_rate: 1.9
+                iso_currency_code: EUR
+                payment_method: invoice
+                invoice_number: 'A-1234'
+                invoice_date: 2023-02-09T00:00:00.000Z
+                billing_address: 
+                    first_name: Mia
+                    last_name: Musterer
+                    address1: Bahnhofsplatz 8
+                    address2: c/o Test SE
+                    company_name: Acme Inc
+                    postal_code: '91522'
+                    city: Ansbach
+                    region: Bavaria
+                    country_code: DE
+                    email: pp-cc-kam+3240+10103200471234@test.de,
+                    phone: 0152-890938
+                    tax_type: VAT
+                    tax_id: DE123456789
+                shippingAddress: 
+                    first_name: Mia
+                    last_name: Musterer
+                    address1: Bahnhofsplatz 8
+                    address2: c/o Test SE
+                    company_name: Acme Inc
+                    postal_code: 91522
+                    city: Ansbach
+                    region: Bayern
+                    country_code: DE
+                    email: pp-cc-kam+3240+10103200471234@test.de
+                    phone: 0187-9883755
+                line_items:
+                    - id: 53
+                      platform_id: a2235
+                      variant_id: z8889
+                      barcode: '5901234123457'
+                      sku: '1234'
+                      name: mug
+                      fulfillment_status: UNFILFILLED
+                      serial_number: '1234'
+                      requires_shipping: true
+                      weight: 1000
+                      unit_weight: g
+                      quantity: 1
+                      total_discount: 1050
+                      subtotal_price: 19300
+                      total_price: 19300
+                      tax_rate: 1.9
+                      total_tax: 20  
+                      unit_cost: 1420
+                      iso_currency_code: EUR
+                      delivery_time: 1
+                      country_of_origin: DE
+                      created_at: 2023-02-09T00:00:00.000Z
+                      updated_at: 2023-02-09T00:00:00.000Z
+                total_weight: 1000
+                unit_weight: g
+                created_at: 2023-02-09T00:00:00.000Z
+                updated_at: 2023-02-09T00:00:00.000Z
+                fulfillments:
+                    - id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                      carrier: express ship
+                      delivery_type: express
+                      tracking_number: "782833755"
+                      tracking_url: http://express-ship.com/782833755
+                      return_tracking_number: "782833755"
+                      return_tracking_url: http://express-ship.com/782833755
+                      shipping: 2522
+                      iso_currency_code: EUR
+                      orders:
+                          - platform_id: 456a
+                      line_items:
+                          - platform_id: a2235
+                            quantity: "2"
+                          - platform_id: b23234
+                      quantity: "5"
+                      parcels: 1
+                      weight: 1000
+                      unit_weight: g
+                      shipped_at: 2023-02-09T00:00:00.000Z
+                      created_at:  2023-02-09T00:00:00.000Z
+                      updated_at: 2023-02-09T00:00:00.000Z 
+        FulfillmentId:
+            description: The unique identifier of the fulfillment
+            type: string
+        Fulfillment:
+            type: object
+            required: 
+                - id
+            properties:
+                id:
+                    type: string
+                    description: Unique identifier of the fulfillment within delta.
+                carrier:
+                    type: string
+                    description: The name of the carrier.
+                delivery_type:
+                    type: string
+                    description: The type of delivery (e.g. Same-Day Delivery, Standard 48h).
+                tracking_number:
+                    type: string
+                    description: The tracking number for the fulfillment.
+                tracking_url:
+                    type: string
+                    description: The tracking link for the fulfillment..
+                return_tracking_number:
+                    type: string
+                    description: The return tracking number for the fulfillment. Occasionally required to provide by platforms upon fulfillment..
+                return_tracking_url:
+                    type: string
+                    description: The return tracking URL for the fulfillment. Occasionally required to provide by platforms upon fulfillment..
+                shipping:
+                    type: number
+                    description: The cumulated shipping cost of the order.
+                iso_currency_code:
+                    type: string
+                    description: The currency of the shipping cost. (ISO 4217).
+                orders:
+                    type: array
+                    description: The orders associated with the fulfillment.
+                    items:
+                        type: object
+                        properties:
+                            platform_id:
+                                type: string
+                                description: The platform-specific ID of the order.
+                line_items:
+                    type: array
+                    description: The line_items associated with the fulfillment.
+                    items:
+                        type: object
+                        properties:
+                            platform_id:
+                                type: string
+                                description: The platform-specific ID of the line_items.
+                            quantity:
+                                type: string
+                                description: The quantity of the line_item.
+                parcels:
+                    type: number
+                    description: The number of parcels of the fulfillment.
+                weight:
+                    type: number
+                    description: The total weight of the parcels in this fulfillment.
+                unit_weight:
+                    type: string
+                    description: The unit of weight of the parcels in this fulfillment.
+                    enum:
+                        - kg
+                        - g
+                        - lb
+                        - oz
+                created_at:
+                    type: string
+                    description: The date when the order was created. (ISO 8601)
+                updated_at:
+                    type: string
+                    description: The date when the order was last updated. (ISO 8601)
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                carrier: express ship
+                delivery_type: express
+                tracking_number: "782833755"
+                tracking_url: http://express-ship.com/782833755
+                return_tracking_number: "782833755"
+                return_tracking_url: http://express-ship.com/782833755
+                shipping: 2522
+                iso_currency_code: EUR
+                orders:
+                    - platform_id: 456a
+                line_items:
+                    - platform_id: a2235
+                      quantity: "2"
+                    - platform_id: b23234
+                      quantity: "5"
+                parcels: 1
+                weight: 1000
+                unit_weight: g
+                created_at: 2023-02-09T00:00:00.000Z
+                updated_at: 2023-02-09T00:00:00.000Z
+        ProductId:
+            description: The unique identifier of the product.
+            type: string
+        Product:
+            type: object
+            required: 
+                - id
+            properties:
+                id:
+                    $ref: "#/components/schemas/ProductId"
+                connection_id:
+                    type: string
+                    description: Unique identifier of the integration on delta.
+                platform_id:
+                    type: string
+                    description: The platform-specific ID of the product.
+                name:
+                    type: string
+                    description: The name of the product.
+                description:
+                    type: string
+                    description: The description of the product.
+                category:
+                    type: string
+                    description: The category of the product.
+                status:
+                    type: string
+                    description: The status of the product.
+                media:
+                    type: array
+                    description: The media files of the product.
+                    properties:
+                        url:
+                            type: string
+                            description: The URL of the media file.
+                        type:
+                            type: string
+                            description: The type of the media file.
+                variants:
+                    type: array
+                    description: Variant of the product
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: string
+                                description: Unique identifier of the variant within delta.
+                            platform_id:
+                                type: string
+                                description: The platform-specific ID of the product.
+                            variant_id:
+                                type: string
+                                description: The platform-specific ID of the variant.
+                            barcode:
+                                type: string
+                                description: The barcode for the item.
+                            sku:
+                                type: string
+                                description: The SKU of the item.
+                            name:
+                                type: string
+                                description: The name of the item.
+                            status:
+                                type: string
+                                description: The status of the item. 
+                            color:
+                                type: string
+                                description: The color of the item.
+                            size:
+                                type: string
+                                description: The size of the item, For example "M".
+                            pricing_details:
+                                type: object
+                                description: The price information about the item.
+                                properties:
+                                    price:
+                                        type: number
+                                        description: The current gross retail price of the item.
+                                    former_price:
+                                        type: number
+                                        description: The former gross retail price of the item.
+                                    suggested_price:
+                                        type: number
+                                        description: The manufacturer's recommended gross retail price of the item.
+                                    unit_cost:
+                                        type: number
+                                        description: The unit cost of the item.
+                                    iso_currency_code:
+                                        type: string
+                                        description: The currency of the item. (ISO 4217)
+                                    tax_rate:
+                                        type: string
+                                        description: The tax rate of the item.
+                                        enum:
+                                            - reduced
+                                            - normal
+                                            - free
+                            country_of_origin:
+                                type: string
+                                description: The country of origin of the item. (ISO 3166-1)
+                            Customs:
+                                type: object
+                                properties:
+                                    tariff_codes:
+                                        type: array
+                                        description: Array of tariff codes
+                                        items:
+                                            type: object
+                                            properties:
+                                                nomenclature:
+                                                    type: string
+                                                    enum: [TARIC, Instrastat, HS-Code, Other]
+                                                    description: Nomenclature of the tariff code
+                                                iso_country_code:
+                                                    type: string
+                                                    description: ISO Country code associated with the tariff code
+                                                code:
+                                                    type: string
+                                                    description: The tariff code
+                            total_stock:
+                                type: number
+                                description: The total stock of the item.
+                            unit_type:
+                                type: string
+                                description: The unit type of the item.
+                                enum:
+                                    - piece
+                                    - weight
+                            replacement:
+                                type: boolean
+                                description: Boolean flag whether the item is replaceable.
+                            replacement_time:
+                                type: number
+                                description: The regular replacement delivery time of the item.
+                            order_min:
+                                type: number
+                                description: The minimum order quantity of the item.
+                            order_max:
+                                type: number
+                                description: The maximum order quantity of the item.
+                            pieces:
+                                type: number
+                                description: The number of package pieces.
+                            requires_shipping:
+                                type: boolean
+                                description: Boolean flag whether the item requires shipping.
+                            carrier:
+                                type: string
+                                description: The name of the carrier.
+                            delivery_type:
+                                type: string
+                                description: The type of delivery (e.g. Same-Day Delivery, Standard 48h).
+                            delivery_time:
+                                type: number
+                                description: The regular delivery time of the item.
+                            dimensions:
+                                type: object
+                                description: The size and weight information of the item..
+                                properties:
+                                    width:
+                                        type: number
+                                        description: The width of the item.
+                                    height:
+                                        type: number
+                                        description: The height of the item.
+                                    length:
+                                        type: number
+                                        description: The length of the item.
+                                    unit_size:
+                                        type: string
+                                        description: The unit of the item size.
+                                    weight:
+                                        type: number
+                                        description: The weight of the item.
+                                    unit_weight:
+                                        type: string
+                                        description: The unit of the item weight.
+                            media:
+                                type: object
+                                description: The media files of the item.
+                                properties:
+                                    url:
+                                        type: string
+                                        description: The URL of the media file.
+                                    type:
+                                        type: string
+                                        description: The type of the media file.
+                            tags:
+                                type: object
+                                description: The individual tags or attributes of the item.
+                                properties:
+                                    name:
+                                        type: string
+                                        description: The name of the tag or attribute.
+                                    value:
+                                        type: string
+                                        description: The value of the tag or attribute.
+                                    language:
+                                        type: string
+                                        description: The language of the tag or attribute. (ISO 639)
+                            created_at:
+                                type: string
+                                description: The date when the variant was created. (ISO 8601)
+                            updated_at:
+                                type: string
+                                description: The date when the variant was last updated. (ISO 8601)
+                created_at:
+                    type: string
+                    description: The date when the product was created. (ISO 8601)
+                updated_at:
+                    type: string
+                    description: The date when the product was last updated. (ISO 8601)
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                connection_id: '123'
+                platform_id: a8883
+                name: 'mug'
+                description: 'iron steal'
+                category: 'home'
+                status: 'active'
+                media: ['http://url_image.com']
+                variants:
+                    - id: a8889
+                      platform_id: z8277
+                      variant_id: i277
+                      barcode: '999234'
+                      sku: 0ki888
+                      name: Mug
+                      status: 'active'
+                      pricing_details:
+                        price: 9800
+                        former_price: 2000
+                        suggested_price: 5000
+                        unit_cost: 7899
+                        iso_currency_code: 'EUR'
+                        tax_rate: reduced
+                      country_of_origin: DE
+                      customs:
+                        - tariff_codes:
+                            - nomenclature: TARIC
+                              iso_country_code: DE
+                              code: '123456'
+                            - nomenclature: COMBINED_NOMENCLATURE
+                              iso_country_code: DE
+                              code: '123456'
+                      total_stock: 2
+                      unit_type: piece
+                      replacement: false
+                      replacement_time: 0
+                      order_min: 1
+                      order_max: 5
+                      pieces: 8
+                      requires_shipping: true
+                      carrier: express ship
+                      delivery_type: Same-Day
+                      delivery_time: 20
+                      dimensions:
+                          width: 78
+                          height: 99
+                          length: 55
+                          unit_size: cm.
+                          weight: 82
+                          unit_weight: kg.
+                      media:
+                        url: 'http://url.com'
+                        type: 'image'
+                      tags:
+                        name: color
+                        value: blue
+                        language: EN
+                      created_at: 2023-02-09T00:00:00.000Z 
+                      updated_at: 2023-02-09T00:00:00.000Z 
+                created_at: 2023-02-09T00:00:00.000Z 
+                updated_at: 2023-02-09T00:00:00.000Z 
+        ProductWithoutId:
+            allOf:
+                - $ref: '#/components/schemas/Product'
+                # - type: object
+                #   properties:
+                #     id:
+                #       type: string
+                #       nullable: true
+            example: 
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                connection_id: '123'
+                platform_id: a8883
+                name: 'mug'
+                description: 'iron steal'
+                category: 'home'
+                status: 'active'
+                media: ['http://url_image.com']
+                variants:
+                    - id: a8889
+                      platform_id: z8277
+                      variant_id: i277
+                      barcode: '999234'
+                      sku: 0ki888
+                      name: Mug
+                      status: 'active'
+                      pricing_details:
+                        price: 9800
+                        former_price: 2000
+                        suggested_price: 5000
+                        unit_cost: 7899
+                        iso_currency_code: 'EUR'
+                        tax_rate: reduced
+                      country_of_origin: DE
+                      customs:
+                        - tariff_codes:
+                            - nomenclature: TARIC
+                              iso_country_code: DE
+                              code: '123456'
+                            - nomenclature: COMBINED_NOMENCLATURE
+                              iso_country_code: DE
+                              code: '123456'
+                      total_stock: 2
+                      unit_type: piece
+                      replacement: false
+                      replacement_time: 0
+                      order_min: 1
+                      order_max: 5
+                      pieces: 8
+                      requires_shipping: true
+                      carrier: express ship
+                      delivery_type: Same-Day
+                      delivery_time: 20
+                      dimensions:
+                          width: 78
+                          height: 99
+                          length: 55
+                          unit_size: cm.
+                          weight: 82
+                          unit_weight: kg.
+                      media:
+                        url: 'http://url.com'
+                        type: 'image'
+                      tags:
+                        name: color
+                        value: blue
+                        language: EN
+                      created_at: 2023-02-09T00:00:00.000Z 
+                      updated_at: 2023-02-09T00:00:00.000Z 
+                created_at: 2023-02-09T00:00:00.000Z 
+                updated_at: 2023-02-09T00:00:00.000Z  
+        InventoryId:
+            type: string
+            description: Unique identifier of the inventory within delta.
+        Inventory:
+            type: object
+            required:
+                - id 
+            properties:
+                id:
+                    type: string
+                    description: Unique identifier of the inventory within delta.
+                connection_id:
+                    type: string
+                    description: Unique identifier of the connected platform within delta.
+                variant_id:
+                    type: string
+                    description: The platform-specific ID of the inventory.
+                barcode:
+                    type: string
+                    description: The barcode of the inventory.
+                sku:
+                    type: string
+                    description: The SKU of the inventory.
+                total_stock:
+                    type: number
+                    description: The total stock of the inventory.
+                location_id:
+                    type: string
+                    description: Unique identifier of the location within delta. 
+                location_platform_id:
+                    type: string
+                    description: The platform-specific ID of the location.
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                connection_id: 71f133b0-7936-4c46-8905-df646095537a
+                variant_id: 2522A
+                barcode: '5901234123457'
+                sku: '1234'
+                total_stock: 27
+                location_id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                location_platform_id: '4523' 
+        InventorySet:
+            type: object
+            required:
+                - id 
+                - sku
+                - total_stock
+                - location_platform_id
+            properties:
+                id:
+                    type: string
+                    description: Unique identifier of the inventory within delta.
+                connection_id:
+                    type: string
+                    description: Unique identifier of the connected platform within delta.
+                variant_id:
+                    type: string
+                    description: The platform-specific ID of the inventory.
+                barcode:
+                    type: string
+                    description: The barcode of the inventory.
+                sku:
+                    type: string
+                    description: The SKU of the inventory.
+                total_stock:
+                    type: number
+                    description: The total stock of the inventory.
+                change_date:
+                    type: string
+                    description: Automatic time stamp to compare the upt-to-dateness of existing information.
+                location_id:
+                    type: string
+                    description: Unique identifier of the location within delta. 
+                location_platform_id:
+                    type: string
+                    description: The platform-specific ID of the location.
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                connection_id: 71f133b0-7936-4c46-8905-df646095537a
+                variant_id: 2522A
+                barcode: '5901234123457'
+                sku: '1234'
+                total_stock: 27
+                location_id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                location_platform_id: '4523' 
+        InventoryWithoutId:
+            allOf:
+                - $ref: '#/components/schemas/Inventory'
+                # - type: object
+                #   properties:
+                #     id:
+                #       type: string
+                #       nullable: true
+            example:
+                connection_id: 71f133b0-7936-4c46-8905-df646095537a
+                variant_id: 2522A
+                barcode: '5901234123457'
+                sku: '1234'
+                total_stock: 27
+                location_id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                location_platform_id: '4523' 
+        LocationId:
+            type: string
+            description: Unique identifier of the location within delta.
+        Location:
+            type: object
+            required:
+              - id
+            properties:
+                id:
+                    type: string
+                    description: Unique identifier of the location within delta.
+                platform_id:
+                    type: string
+                    description: The platform-specific ID of the location.
+                name:
+                    type: string
+                    description: The name of the location.
+                type:
+                    type: string
+                    description: The type of the location.
+                    enum:
+                        - warehouse
+                        - store
+                        - office
+                        - other
+                status:
+                    type: string
+                    description: The status of the location.
+                    enum:
+                        - active
+                        - inactive
+                        - unknown
+                address1:
+                    type: string
+                    description: The first address line of the address.
+                address2:
+                    type: string
+                    description: The second address line of the address.
+                postal_code:
+                    type: string
+                    description: The postal code of the address.
+                city:
+                    type: string
+                    description: The city of the address.
+                region:
+                    type: string
+                    description: The region of the address. 
+                country_code:
+                    type: string
+                    description: The country of the address. (ISO 3166-1)
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                platform_id: '4523'
+                name: 'berlin'
+                type: 'warehouse'
+                status: 'active'
+                address1: 'LuhmenStr. 185'
+                address2: 'c/o Test SE'
+                postal_code: '10115'
+                city: 'Berlin'
+                region: 'Berlin'
+                countryCode: 'DE'
+        ReturnId:
+            type: string
+            description: The unique identifier of the return within delta. 
+        Return:
+            type: object
+            required:
+                - id
+            properties:
+                id:
+                    type: string
+                    description: The unique identifier of the return within delta. 
+                connection_id:
+                    type: string
+                    description: Unique identifier of the connected platform within delta.
+                platform_id:
+                    type: string
+                    description: The platform-specific ID of the return.
+                status:
+                    type: string
+                    description: Status of the order return. Can be one of announced, transit, delivered, canceled, completed, or other.
+                    enum:
+                        - ANNOUNCED
+                        - TRANSIT
+                        - DELIVERED
+                        - CANCELED
+                        - COMPLETED
+                        - OTHER
+                quantity:
+                    type: number
+                    description: The number of items within the return.
+                shopper_message:
+                    type: string
+                    description: A message of the shopper for the return.
+                carrier:
+                    type: string
+                    description: The name of the carrier used for the return.
+                tracking_number:
+                    type: string
+                    description: The tracking number for the return.
+                created_at:
+                    type: string
+                    description: The date when the return was created. (ISO 8601)
+                updated_at:
+                    type: string
+                    description: The date when the return was last updated. (ISO 8601)
+                returned_orders:
+                    type: array
+                    description: The orders and products of the return.
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: number
+                                description: Unique identifier of the order within delta.
+                            platform_id:
+                                type: string
+                                description: The platform-specific ID of the order.
+                            returned_items:
+                                type: array
+                                description: The list of returned items.
+                                items:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: number
+                                            description: Unique identifier of the line item within delta.
+                                        platform_id:
+                                            type: string
+                                            description: vThe platform-specific ID of the product.
+                                        variant_id:
+                                            type: string
+                                            description: The platform-specific ID of the variant.
+                                        barcode:
+                                            type: string
+                                            description: The barcode for the item.
+                                        sku:
+                                            type: string
+                                            description: The SKU of the item.
+                                        quantity:
+                                            type: number
+                                            description: The number of returned items.
+                                        reason:
+                                            type: string
+                                            description: The reaons of the return.
+                                        condition:
+                                            type: string
+                                            description: The condition of the returned items. Can be one of like_new, used, or damaged.
+                                            enum:
+                                                - like_new
+                                                - used
+                                                - damaged
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                connection_id: '71f133b0-7936-4c46-8905-df646095537a'
+                platform_id: '2522'
+                status: 'delivered'
+                quantity: 10
+                shopper_message: 'defective'
+                carrier: 'DHL'
+                tracking_number: 'A12356FG'
+                created_at: '2023-02-09T00:00:00.000Z'
+                updated_at: '2023-02-09T00:00:00.000Z'
+                returned_orders: 
+                    - id: 45
+                      platform_id: '2522'
+                      returned_items:
+                            - id: 53
+                              platform_id: a2235
+                              variant_id: z8889
+                              barcode: '5901234123457'
+                              sku: '1234'
+                              quantity: 1
+                              reason: defective
+                              condition: used
+        ReturnWithoutId:
+            allOf:
+                - $ref: '#/components/schemas/Return'
+                # - type: object
+                #   properties:
+                #     id:
+                #       type: string
+                #       nullable: true
+            example: 
+                connection_id: '71f133b0-7936-4c46-8905-df646095537a'
+                platform_id: '2522'
+                status: 'delivered'
+                quantity: 10
+                shopper_message: 'defective'
+                carrier: 'DHL'
+                tracking_number: 'A12356FG'
+                created_at: '2023-02-09T00:00:00.000Z'
+                updated_at: '2023-02-09T00:00:00.000Z'
+                returned_orders: 
+                    - id: 45
+                      platform_id: '2522'
+                      returned_items:
+                            - id: 53
+                              platform_id: a2235
+                              variant_id: z8889
+                              barcode: '5901234123457'
+                              sku: '1234'
+                              quantity: 1
+                              reason: defective
+                              condition: used
+        TransactionId:
+            description: The unique identifier of the transaction 
+            type: string
+        Transaction:
+            type: object
+            required:
+                - id
+            properties:
+                id:
+                    $ref: "#/components/schemas/TransactionId"
+                connection_id:
+                    type: string
+                    description: Unique identifier of the integration on delta.
+                platform_id:
+                    type: string
+                    description: The platform-specific ID of the transaction.
+                order_id:
+                    type: string
+                    description: The platform-specific ID of the associated order.
+                type:
+                    type: string
+                    description: One of sale, refund, or other.
+                    enum:
+                        - sale
+                        - refunt
+                        - other
+                payment_gateway:
+                    type: string
+                    description: The gateway associated with the transaction.
+                payment_method:
+                    type: string
+                    description: One of cash, card, or other.
+                    enum:
+                        - card
+                        - cash
+                        - other
+                status:
+                    type: string
+                    description: One of success, failed, pending, canceled, refunded, or other.
+                    enum:
+                        - success
+                        - failed
+                        - pending
+                        - canceled
+                        - refunded
+                        - other
+                total_amount:
+                    type: number
+                    description: The amount of the transaction.
+                iso_currency_code:
+                    type: string
+                    description: The currency of the transaction. (ISO 4217)
+                created_at:
+                    type: string
+                    description: The date when the transaction was created. (ISO 8601)
+                updated_at:
+                    type: string
+                    description: The date when the transaction was last updated. (ISO 8601)
+            example:
+                id: 53f1e593-24d4-4110-8b2d-4e18d5461c33
+                connection_id: '71f133b0-7936-4c46-8905-df646095537a'
+                platform_id: '2522'
+                order_id: 899ab 
+                type: sale
+                payment_gateway: 'card_payment'
+                payment_method: 'card'
+                status: 'success'
+                total_amount: 1000
+                iso_currency_code: 'EUR'
+                created_at: '2023-02-09T00:00:00.000Z'
+                updated_at: '2023-02-09T00:00:00.000Z'
+        AccountCollection:
+            type: object
+            properties:
+                orders:
+                    type: array
+                    items: 
+                        $ref: "#/components/schemas/Account"
+        AccountId:
+            description: The unique identifier of the account.
+            type: string
+        Account:
+            type: object
+            required:
+                - account_id
+            properties:
+                id:
+                    $ref: "#/components/schemas/AccountId"
+                connection_id:
+                    type: string
+                    description: Unique identifier of the integration on delta.
+                account_id:
+                    type: string
+                    description: Unique identifier of platform for the account.
+                category:
+                    type: string
+                    description: Cateogory of the account.
+                    enum:
+                        - asset
+                        - expense
+                        - income
+                        - liability
+                        - equity
+                        - unknown
+                type:
+                    type: string
+                    description: Type of the account.
+                    enum:
+                        - accounts_payable
+                        - accounts_receivable
+                        - bank
+                        - credit_card
+                        - fixed_asset
+                        - other_asset
+                        - liability
+                        - equity
+                        - expense
+                        - income
+                        - unknown
+                status:
+                    type: string
+                    description: Status of the account.
+                    enum:
+                        - active
+                        - inactive
+                        - pending
+                nominal_code:
+                    type: string
+                    description: Nominal code of the account.
+                name:
+                    type: string
+                    description: Name of the account.
+                description:
+                    type: string
+                    description: Description of the account.
+                balance:
+                    type: number
+                    description: Balance of the account.
+                currency:
+                    type: string
+                    description: ISO 4217 currency code associated with the account.
+                created_at:
+                    type: string
+                    description: Creation date of the return on the integration platform
+                updated_at:
+                    type: string
+                    description: Last update on the return of the integration platform
+        JournalEntryId:
+            description: The unique identifier of the journal entry.
+            type: string
+        JournalEntry:
+            type: object
+            required:
+                - journal_entry_id
+            properties:
+                id:
+                    $ref: "#/components/schemas/JournalEntryId"
+                connection_id:
+                    type: string
+                    description: Unique identifier of the integration on delta.
+                journal_id:
+                    type: string
+                    description: Unique identifier of platform for the journal entry.
+                description:
+                    type: string
+                    description: Description of the journal entry.
+                transaction_date:
+                    type: string
+                    description: Transaction date of the journal entry.
+                created_at:
+                    type: string
+                    description: Creation date of the return on the integration platform.
+                updated_at:
+                    type: string
+                    description: Last update on the return of the integration platform.
+                currency:
+                    type: string
+                    description: ISO 4217 currency code associated with the journal entry.
+                line_items:
+                    type: array
+                    description: A list of line items associated with the journal entry.
+                    items:
+                        type: object
+                        properties:
+                            description:
+                                type: string
+                                description: description of the line item associated with the journal entry.
+                            total_amount:
+                                type: number
+                                description: Amount for the line item. Positive for debit entries and negative for credit entries.
+                            account_id:
+                                type: string
+                                description: Unique identifier of the account associated with the journal entry.
+                            account_name:
+                                type: string
+                                description: Name of the account associated with the journal entry.
+        Error:
+            type: object
+            required:
+                - message
+            properties:
+                message:
+                    description: A human readable error message
+                    type: string      
+    securitySchemes:
+        Authorization:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+            description: JWT bearer TOKEN
+        # PlatformKey:
+        #     type: apiKey
+        #     in: header
+        #     name: Platform-Key
+        #     description: Platform key token per customer integration
+security:
+    - Authorization: []
+    #   PlatformKey: []
+      
