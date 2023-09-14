@@ -1651,13 +1651,15 @@ components:
                 media:
                     type: array
                     description: The media files of the product.
-                    properties:
-                        url:
-                            type: string
-                            description: The URL of the media file.
-                        type:
-                            type: string
-                            description: The type of the media file.
+                    items:
+                        type: object
+                        properties:
+                            url:
+                                type: string
+                                description: The URL of the media file.
+                            type:
+                                type: string
+                                description: The type of the media file.
                 variants:
                     type: array
                     description: Variant of the product
@@ -2481,12 +2483,12 @@ components:
             scheme: bearer
             bearerFormat: JWT
             description: JWT bearer TOKEN
-        # PlatformKey:
-        #     type: apiKey
-        #     in: header
-        #     name: Platform-Key
-        #     description: Platform key token per customer integration
+        PlatformKey:
+            type: apiKey
+            in: header
+            name: Platform-Key
+            description: Platform key token per customer integration
 security:
     - Authorization: []
-    #   PlatformKey: []
+      PlatformKey: []
       
