@@ -1,0 +1,11 @@
+# JournalEntryLineItems
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `accountId`                                                                           | *string*                                                                              | :heavy_minus_sign:                                                                    | Unique identifier of the account associated with the journal entry.                   |
+| `accountName`                                                                         | *string*                                                                              | :heavy_minus_sign:                                                                    | Name of the account associated with the journal entry.                                |
+| `description`                                                                         | *string*                                                                              | :heavy_minus_sign:                                                                    | description of the line item associated with the journal entry.                       |
+| `totalAmount`                                                                         | *number*                                                                              | :heavy_minus_sign:                                                                    | Amount for the line item. Positive for debit entries and negative for credit entries. |
