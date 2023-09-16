@@ -1,4 +1,4 @@
-# returns
+# Returns
 
 ## Overview
 

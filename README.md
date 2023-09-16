@@ -12,13 +12,13 @@
 ### NPM
 
 ```bash
-npm add https://github.com/speakeasy-sdks/delta-api
+npm add delta
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/speakeasy-sdks/delta-api
+yarn add delta
 ```
 <!-- End SDK Installation -->
 
@@ -51,51 +51,51 @@ sdk.accounts.getAccountById({
 ## Available Resources and Operations
 
 
-### [accounts](docs/sdks/accounts/README.md)
+### [Accounts](docs/sdks/accounts/README.md)
 
 * [getAccountById](docs/sdks/accounts/README.md#getaccountbyid) - Get a specific account
 * [getAccounts](docs/sdks/accounts/README.md#getaccounts) - Get all accounts
 
-### [fulfillments](docs/sdks/fulfillments/README.md)
+### [Fulfillments](docs/sdks/fulfillments/README.md)
 
 * [getFulfillmentById](docs/sdks/fulfillments/README.md#getfulfillmentbyid) - Get a specific fulfillment
 * [postFulfillments](docs/sdks/fulfillments/README.md#postfulfillments) - Create a new fulfillment
 
-### [inventory](docs/sdks/inventory/README.md)
+### [Inventory](docs/sdks/inventory/README.md)
 
 * [getInvetory](docs/sdks/inventory/README.md#getinvetory) - Get all inventories
 * [getInvetoryById](docs/sdks/inventory/README.md#getinvetorybyid) - Get a specific inventory
 * [postSetInventories](docs/sdks/inventory/README.md#postsetinventories) - Update the stock level of an inventory item at a location
 
-### [journalEntries](docs/sdks/journalentries/README.md)
+### [JournalEntries](docs/sdks/journalentries/README.md)
 
 * [getJournalEntries](docs/sdks/journalentries/README.md#getjournalentries) - Get all journal entries
 * [getJournalEntryById](docs/sdks/journalentries/README.md#getjournalentrybyid) - Get a specific journal entry
 
-### [location](docs/sdks/location/README.md)
+### [Location](docs/sdks/location/README.md)
 
 * [getLocationById](docs/sdks/location/README.md#getlocationbyid) - Get a specific location
 * [postLocation](docs/sdks/location/README.md#postlocation) - Create a new location
 
-### [orders](docs/sdks/orders/README.md)
+### [Orders](docs/sdks/orders/README.md)
 
 * [getOrderById](docs/sdks/orders/README.md#getorderbyid) - Get an order by id
 * [getOrders](docs/sdks/orders/README.md#getorders) - Get all orders
 * [patchtOrders](docs/sdks/orders/README.md#patchtorders) - Update a specific order
 * [postOrders](docs/sdks/orders/README.md#postorders) - Create a new order
 
-### [products](docs/sdks/products/README.md)
+### [Products](docs/sdks/products/README.md)
 
 * [getProductById](docs/sdks/products/README.md#getproductbyid) - Get a specific product
 * [getProducts](docs/sdks/products/README.md#getproducts) - Get all products
 * [postProducts](docs/sdks/products/README.md#postproducts) - Create a new product
 
-### [returns](docs/sdks/returns/README.md)
+### [Returns](docs/sdks/returns/README.md)
 
 * [getReturnById](docs/sdks/returns/README.md#getreturnbyid) - Get a specific return
 * [postReturns](docs/sdks/returns/README.md#postreturns) - Create a new return
 
-### [transactions](docs/sdks/transactions/README.md)
+### [Transactions](docs/sdks/transactions/README.md)
 
 * [getTransactionById](docs/sdks/transactions/README.md#gettransactionbyid) - Provide a transaction by id
 * [getTransactions](docs/sdks/transactions/README.md#gettransactions) - Get all transactions

@@ -1,4 +1,4 @@
-# location
+# Location
 
 ## Overview
 
