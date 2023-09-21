@@ -1,6 +1,6 @@
 {
   "name": "delta",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "delta technologies GmbH",
   "scripts": {
     "prepare": "tsc --build"
