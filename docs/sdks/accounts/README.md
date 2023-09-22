@@ -27,7 +27,7 @@ const sdk = new Delta({
 });
 
 sdk.accounts.getAccountById({
-  accountId: "provident",
+  accountId: "distinctio",
 }).then((res: GetAccountByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -66,7 +66,7 @@ const sdk = new Delta({
 });
 
 sdk.accounts.getAccounts({
-  platformKey: "distinctio",
+  platformKey: "quibusdam",
 }).then((res: GetAccountsResponse) => {
   if (res.statusCode == 200) {
     // handle response

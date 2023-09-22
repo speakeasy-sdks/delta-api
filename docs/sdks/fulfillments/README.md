@@ -27,7 +27,7 @@ const sdk = new Delta({
 });
 
 sdk.fulfillments.getFulfillmentById({
-  id: "d9d8d69a-674e-40f4-a7cc-8796ed151a05",
+  id: "9d8d69a6-74e0-4f46-bcc8-796ed151a05d",
 }).then((res: GetFulfillmentByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -67,31 +67,31 @@ const sdk = new Delta({
 });
 
 sdk.fulfillments.postFulfillments({
-  carrier: "repellendus",
-  createdAt: "sapiente",
-  deliveryType: "quo",
-  id: "2ddf7cc7-8ca1-4ba9-a8fc-816742cb7392",
-  isoCurrencyCode: "perferendis",
+  carrier: "sapiente",
+  createdAt: "quo",
+  deliveryType: "odit",
+  id: "ddf7cc78-ca1b-4a92-8fc8-16742cb73920",
+  isoCurrencyCode: "ad",
   lineItems: [
     {
-      platformId: "ad",
-      quantity: "natus",
+      platformId: "natus",
+      quantity: "sed",
     },
   ],
   orders: [
     {
-      platformId: "sed",
+      platformId: "iste",
     },
   ],
-  parcels: 6120.96,
-  returnTrackingNumber: "dolor",
-  returnTrackingUrl: "natus",
-  shipping: 3864.89,
-  trackingNumber: "hic",
-  trackingUrl: "saepe",
-  unitWeight: FulfillmentUnitWeight.Lb,
-  updatedAt: "in",
-  weight: 3595.08,
+  parcels: 2223.21,
+  returnTrackingNumber: "natus",
+  returnTrackingUrl: "laboriosam",
+  shipping: 9437.49,
+  trackingNumber: "saepe",
+  trackingUrl: "fuga",
+  unitWeight: FulfillmentUnitWeight.G,
+  updatedAt: "corporis",
+  weight: 6130.64,
 }).then((res: PostFulfillmentsResponse) => {
   if (res.statusCode == 200) {
     // handle response

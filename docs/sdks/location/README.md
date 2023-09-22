@@ -27,7 +27,7 @@ const sdk = new Delta({
 });
 
 sdk.location.getLocationById({
-  locationId: "ut",
+  locationId: "maiores",
 }).then((res: GetLocationByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -67,17 +67,17 @@ const sdk = new Delta({
 });
 
 sdk.location.postLocation({
-  address1: "maiores",
-  address2: "dicta",
-  city: "West Jayden",
-  countryCode: "BQ",
-  id: "b5e6e13b-99d4-488e-9e91-e450ad2abd44",
-  name: "Beth McGlynn Sr.",
-  platformId: "assumenda",
-  postalCode: "01652",
-  region: "facilis",
-  status: LocationStatus.Unknown,
-  type: LocationType.Store,
+  address1: "dicta",
+  address2: "corporis",
+  city: "South Birdie",
+  countryCode: "OM",
+  id: "5e6e13b9-9d48-48e1-a91e-450ad2abd442",
+  name: "Mr. Shelly Lueilwitz",
+  platformId: "ipsam",
+  postalCode: "16527",
+  region: "tempore",
+  status: LocationStatus.Active,
+  type: LocationType.Other,
 }).then((res: PostLocationResponse) => {
   if (res.statusCode == 200) {
     // handle response

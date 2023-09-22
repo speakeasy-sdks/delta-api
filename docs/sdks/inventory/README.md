@@ -64,7 +64,7 @@ const sdk = new Delta({
 });
 
 sdk.inventory.getInvetoryById({
-  inventoryId: "iste",
+  inventoryId: "iure",
 }).then((res: GetInvetoryByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -103,15 +103,15 @@ const sdk = new Delta({
 });
 
 sdk.inventory.postSetInventories({
-  barcode: "iure",
-  changeDate: "saepe",
-  connectionId: "quidem",
-  id: "10faaa23-52c5-4955-907a-ff1a3a2fa946",
-  locationId: "quam",
-  locationPlatformId: "molestiae",
-  sku: "velit",
-  totalStock: 6235.1,
-  variantId: "quia",
+  barcode: "saepe",
+  changeDate: "quidem",
+  connectionId: "architecto",
+  id: "0faaa235-2c59-4559-87af-f1a3a2fa9467",
+  locationId: "molestiae",
+  locationPlatformId: "velit",
+  sku: "error",
+  totalStock: 1589.69,
+  variantId: "quis",
 }).then((res: PostSetInventoriesResponse) => {
   if (res.statusCode == 200) {
     // handle response

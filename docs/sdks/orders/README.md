@@ -29,7 +29,7 @@ const sdk = new Delta({
 });
 
 sdk.orders.getOrderById({
-  orderId: "delectus",
+  orderId: "eum",
 }).then((res: GetOrderByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -69,11 +69,11 @@ const sdk = new Delta({
 });
 
 sdk.orders.getOrders({
-  platformKey: "eum",
-  first: 248753,
-  from: new RFCDate("2021-04-10"),
-  next: 396098,
-  to: new RFCDate("2021-03-17"),
+  platformKey: "non",
+  first: 756107,
+  from: new RFCDate("2022-03-17"),
+  next: 592042,
+  to: new RFCDate("2021-04-14"),
 }).then((res: GetOrdersResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -120,9 +120,9 @@ const sdk = new Delta({
 sdk.orders.patchtOrders({
   orderWithoutId: {
     billingAddress: {
-      address1: "sint",
-      address2: "officia",
-      city: "Fort Veda",
+      address1: "officia",
+      address2: "dolor",
+      city: "Waukegan",
       companyName: "dolorum",
       countryCode: "JM",
       email: "Rose.Wolff29@yahoo.com",
