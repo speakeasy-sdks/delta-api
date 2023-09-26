@@ -15,6 +15,9 @@ export class GetReturnByIdRequest extends SpeakeasyBase {
 }
 
 export class GetReturnByIdResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -24,9 +27,15 @@ export class GetReturnByIdResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     return?: shared.Return;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

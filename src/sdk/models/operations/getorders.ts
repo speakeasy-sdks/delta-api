@@ -37,6 +37,9 @@ export class GetOrdersRequest extends SpeakeasyBase {
 }
 
 export class GetOrdersResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -46,9 +49,15 @@ export class GetOrdersResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     orderCollection?: shared.OrderCollection;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }
