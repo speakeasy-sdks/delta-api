@@ -1,4 +1,5 @@
 # Inventory
+(*inventory*)
 
 ## Overview
 
