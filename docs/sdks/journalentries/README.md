@@ -64,7 +64,7 @@ const sdk = new Delta({
 });
 
 sdk.journalEntries.getJournalEntryById({
-  id: "1aa52c3f-5ad0-419d-a1ff-e78f097b0074",
+  id: "<ID>",
 }).then((res: GetJournalEntryByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response

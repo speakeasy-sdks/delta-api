@@ -28,7 +28,7 @@ const sdk = new Delta({
 });
 
 sdk.returns.getReturnById({
-  returnId: "eum",
+  returnId: "benchmark",
 }).then((res: GetReturnByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -68,34 +68,34 @@ const sdk = new Delta({
 });
 
 sdk.returns.postReturns({
-  carrier: "quas",
-  connectionId: "praesentium",
-  createdAt: "consequuntur",
-  id: "82aa4825-62f2-422e-9817-ee17cbe61e6b",
-  platformId: "molestiae",
-  quantity: 6996.22,
+  carrier: "around Northwest extremely",
+  connectionId: "Mobility generating but",
+  createdAt: "Intelligent",
+  id: "<ID>",
+  platformId: "Erbium",
+  quantity: 2428.77,
   returnedOrders: [
     {
-      id: 5801.97,
-      platformId: "minima",
+      id: 1714.06,
+      platformId: "phooey",
       returnedItems: [
         {
-          barcode: "distinctio",
-          condition: ReturnWithoutIdReturnedOrdersReturnedItemsCondition.Damaged,
-          id: 270.69,
-          platformId: "culpa",
-          quantity: 7313.98,
-          reason: "adipisci",
-          sku: "cumque",
-          variantId: "consequuntur",
+          barcode: "repurpose Kia Tuna",
+          condition: ReturnWithoutIdReturnedOrdersReturnedItemsCondition.Used,
+          id: 4100.32,
+          platformId: "Helium Pound",
+          quantity: 3670.01,
+          reason: "generating",
+          sku: "Program revolutionize Massachusetts",
+          variantId: "Unbranded Mazda Bedfordshire",
         },
       ],
     },
   ],
-  shopperMessage: "consequatur",
-  status: ReturnWithoutIdStatus.Completed,
-  trackingNumber: "quaerat",
-  updatedAt: "sapiente",
+  shopperMessage: "Internal",
+  status: ReturnWithoutIdStatus.Other,
+  trackingNumber: "static",
+  updatedAt: "West Southeast",
 }).then((res: PostReturnsResponse) => {
   if (res.statusCode == 200) {
     // handle response

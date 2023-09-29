@@ -13,7 +13,7 @@ const sdk = new Delta({
 });
 
 sdk.accounts.getAccountById({
-  accountId: "corrupti",
+  accountId: "man Honda Pants",
 }).then((res: GetAccountByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response

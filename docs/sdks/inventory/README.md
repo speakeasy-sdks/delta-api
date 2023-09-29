@@ -65,7 +65,7 @@ const sdk = new Delta({
 });
 
 sdk.inventory.getInvetoryById({
-  inventoryId: "iure",
+  inventoryId: "Bayer",
 }).then((res: GetInvetoryByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -104,15 +104,15 @@ const sdk = new Delta({
 });
 
 sdk.inventory.postSetInventories({
-  barcode: "saepe",
-  changeDate: "quidem",
-  connectionId: "architecto",
-  id: "0faaa235-2c59-4559-87af-f1a3a2fa9467",
-  locationId: "molestiae",
-  locationPlatformId: "velit",
-  sku: "error",
-  totalStock: 1589.69,
-  variantId: "quis",
+  barcode: "Tugrik",
+  changeDate: "Cargo",
+  connectionId: "Carrollton Spain Pennsylvania",
+  id: "<ID>",
+  locationId: "compressing",
+  locationPlatformId: "Electric wobbly",
+  sku: "Buckinghamshire",
+  totalStock: 1875.52,
+  variantId: "Logan laborum Soft",
 }).then((res: PostSetInventoriesResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -28,7 +28,7 @@ const sdk = new Delta({
 });
 
 sdk.transactions.getTransactionById({
-  transactionId: "consectetur",
+  transactionId: "but",
 }).then((res: GetTransactionByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response

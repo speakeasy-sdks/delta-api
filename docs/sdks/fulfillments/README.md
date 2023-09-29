@@ -28,7 +28,7 @@ const sdk = new Delta({
 });
 
 sdk.fulfillments.getFulfillmentById({
-  id: "9d8d69a6-74e0-4f46-bcc8-796ed151a05d",
+  id: "<ID>",
 }).then((res: GetFulfillmentByIdResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -68,31 +68,31 @@ const sdk = new Delta({
 });
 
 sdk.fulfillments.postFulfillments({
-  carrier: "sapiente",
-  createdAt: "quo",
-  deliveryType: "odit",
-  id: "ddf7cc78-ca1b-4a92-8fc8-16742cb73920",
-  isoCurrencyCode: "ad",
+  carrier: "Transexual",
+  createdAt: "Bicycle crow",
+  deliveryType: "Manager grey",
+  id: "<ID>",
+  isoCurrencyCode: "black azure",
   lineItems: [
     {
-      platformId: "natus",
-      quantity: "sed",
+      platformId: "Luxurious Kentucky",
+      quantity: "Bedfordshire asynchronous West",
     },
   ],
   orders: [
     {
-      platformId: "iste",
+      platformId: "system",
     },
   ],
-  parcels: 2223.21,
-  returnTrackingNumber: "natus",
-  returnTrackingUrl: "laboriosam",
-  shipping: 9437.49,
-  trackingNumber: "saepe",
-  trackingUrl: "fuga",
+  parcels: 9722.37,
+  returnTrackingNumber: "brilliant Wyoming National",
+  returnTrackingUrl: "Corporate",
+  shipping: 4274.24,
+  trackingNumber: "Southwest magenta Dynamic",
+  trackingUrl: "Triathlon/Time",
   unitWeight: FulfillmentUnitWeight.G,
-  updatedAt: "corporis",
-  weight: 6130.64,
+  updatedAt: "Jersey",
+  weight: 2671.66,
 }).then((res: PostFulfillmentsResponse) => {
   if (res.statusCode == 200) {
     // handle response
