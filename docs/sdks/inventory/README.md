@@ -19,20 +19,21 @@ Get all inventories
 
 ```typescript
 import { Delta } from "delta";
-import { GetInvetoryResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.inventory.getInvetory().then((res: GetInvetoryResponse) => {
+  const res = await sdk.inventory.getInvetory();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -55,22 +56,23 @@ Get a specific inventory
 
 ```typescript
 import { Delta } from "delta";
-import { GetInvetoryByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.inventory.getInvetoryById({
-  inventoryId: "Bayer",
-}).then((res: GetInvetoryByIdResponse) => {
+  const res = await sdk.inventory.getInvetoryById({
+    inventoryId: "Bayer",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -94,30 +96,26 @@ Update the stock level of an inventory item at a location.
 
 ```typescript
 import { Delta } from "delta";
-import { PostSetInventoriesResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.inventory.postSetInventories({
-  barcode: "Tugrik",
-  changeDate: "Cargo",
-  connectionId: "Carrollton Spain Pennsylvania",
-  id: "<ID>",
-  locationId: "compressing",
-  locationPlatformId: "Electric wobbly",
-  sku: "Buckinghamshire",
-  totalStock: 1875.52,
-  variantId: "Logan laborum Soft",
-}).then((res: PostSetInventoriesResponse) => {
+  const res = await sdk.inventory.postSetInventories({
+    id: "<ID>",
+    locationPlatformId: "Tugrik",
+    sku: "Cargo",
+    totalStock: 8319.18,
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

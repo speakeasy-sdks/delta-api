@@ -18,22 +18,23 @@ Get a specific transaction
 
 ```typescript
 import { Delta } from "delta";
-import { GetTransactionByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.transactions.getTransactionById({
-  transactionId: "but",
-}).then((res: GetTransactionByIdResponse) => {
+  const res = await sdk.transactions.getTransactionById({
+    transactionId: "but",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -57,20 +58,21 @@ Get all transactions
 
 ```typescript
 import { Delta } from "delta";
-import { GetTransactionsResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.transactions.getTransactions().then((res: GetTransactionsResponse) => {
+  const res = await sdk.transactions.getTransactions();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

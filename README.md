@@ -26,22 +26,23 @@ yarn add delta
 <!-- Start SDK Example Usage -->
 ```typescript
 import { Delta } from "delta";
-import { GetAccountByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.accounts.getAccountById({
-  accountId: "man Honda Pants",
-}).then((res: GetAccountByIdResponse) => {
+  const res = await sdk.accounts.getAccountById({
+    accountId: "man Honda Pants",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 <!-- End SDK Example Usage -->
 

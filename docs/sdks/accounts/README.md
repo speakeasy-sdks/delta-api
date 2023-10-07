@@ -18,22 +18,23 @@ Get a specific account
 
 ```typescript
 import { Delta } from "delta";
-import { GetAccountByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.accounts.getAccountById({
-  accountId: "man Honda Pants",
-}).then((res: GetAccountByIdResponse) => {
+  const res = await sdk.accounts.getAccountById({
+    accountId: "man Honda Pants",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -57,22 +58,21 @@ Get all accounts
 
 ```typescript
 import { Delta } from "delta";
-import { GetAccountsResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.accounts.getAccounts({
-  platformKey: "Chips West",
-}).then((res: GetAccountsResponse) => {
+  const res = await sdk.accounts.getAccounts({});
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

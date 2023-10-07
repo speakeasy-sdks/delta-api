@@ -18,22 +18,23 @@ Get a specific fulfillment
 
 ```typescript
 import { Delta } from "delta";
-import { GetFulfillmentByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.fulfillments.getFulfillmentById({
-  id: "<ID>",
-}).then((res: GetFulfillmentByIdResponse) => {
+  const res = await sdk.fulfillments.getFulfillmentById({
+    id: "<ID>",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -57,47 +58,30 @@ Create a new fulfillment
 
 ```typescript
 import { Delta } from "delta";
-import { PostFulfillmentsResponse } from "delta/dist/sdk/models/operations";
 import { FulfillmentUnitWeight } from "delta/dist/sdk/models/shared";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.fulfillments.postFulfillments({
-  carrier: "Transexual",
-  createdAt: "Bicycle crow",
-  deliveryType: "Manager grey",
-  id: "<ID>",
-  isoCurrencyCode: "black azure",
-  lineItems: [
-    {
-      platformId: "Luxurious Kentucky",
-      quantity: "Bedfordshire asynchronous West",
-    },
-  ],
-  orders: [
-    {
-      platformId: "system",
-    },
-  ],
-  parcels: 9722.37,
-  returnTrackingNumber: "brilliant Wyoming National",
-  returnTrackingUrl: "Corporate",
-  shipping: 4274.24,
-  trackingNumber: "Southwest magenta Dynamic",
-  trackingUrl: "Triathlon/Time",
-  unitWeight: FulfillmentUnitWeight.G,
-  updatedAt: "Jersey",
-  weight: 2671.66,
-}).then((res: PostFulfillmentsResponse) => {
+  const res = await sdk.fulfillments.postFulfillments({
+    id: "<ID>",
+    lineItems: [
+      {},
+    ],
+    orders: [
+      {},
+    ],
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

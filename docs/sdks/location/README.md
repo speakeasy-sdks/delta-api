@@ -18,22 +18,23 @@ Get a specific location
 
 ```typescript
 import { Delta } from "delta";
-import { GetLocationByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.location.getLocationById({
-  locationId: "Implementation tempore connect",
-}).then((res: GetLocationByIdResponse) => {
+  const res = await sdk.location.getLocationById({
+    locationId: "Implementation tempore connect",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -57,33 +58,24 @@ Create a new location
 
 ```typescript
 import { Delta } from "delta";
-import { PostLocationResponse } from "delta/dist/sdk/models/operations";
 import { LocationStatus, LocationType } from "delta/dist/sdk/models/shared";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.location.postLocation({
-  address1: "Chief few",
-  address2: "Consultant",
-  city: "Altadena",
-  countryCode: "SC",
-  id: "<ID>",
-  name: "whenever",
-  platformId: "quae azure why",
-  postalCode: "23800",
-  region: "midst HTTP Luxurious",
-  status: LocationStatus.Unknown,
-  type: LocationType.Warehouse,
-}).then((res: PostLocationResponse) => {
+  const res = await sdk.location.postLocation({
+    id: "<ID>",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

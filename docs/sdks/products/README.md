@@ -19,22 +19,23 @@ Get a specific product
 
 ```typescript
 import { Delta } from "delta";
-import { GetProductByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.products.getProductById({
-  productId: "Wagon Israeli",
-}).then((res: GetProductByIdResponse) => {
+  const res = await sdk.products.getProductById({
+    productId: "Wagon Israeli",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -58,20 +59,21 @@ Get all products
 
 ```typescript
 import { Delta } from "delta";
-import { GetProductsResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.products.getProducts().then((res: GetProductsResponse) => {
+  const res = await sdk.products.getProducts();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -94,102 +96,44 @@ Create a new product
 
 ```typescript
 import { Delta } from "delta";
-import { PostProductsResponse } from "delta/dist/sdk/models/operations";
 import {
   ProductWithoutIdVariantsCustomsTariffCodesNomenclature,
   ProductWithoutIdVariantsPricingDetailsTaxRate,
   ProductWithoutIdVariantsUnitType,
 } from "delta/dist/sdk/models/shared";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.products.postProducts({
-  category: "SUV kelvin Fresh",
-  connectionId: "Fontana Southeast radical",
-  createdAt: "virtual Pickup Fish",
-  description: "Organized modular standardization",
-  id: "<ID>",
-  media: [
-    {
-      type: "Northwest",
-      url: "https://late-finish.info",
-    },
-  ],
-  name: "that",
-  platformId: "Greece Calcium",
-  status: "Hybrid",
-  updatedAt: "Sports Hip",
-  variants: [
-    {
-      customs: {
-        tariffCodes: [
-          {
-            code: "Passenger because Bedfordshire",
-            isoCountryCode: "North sievert",
-            nomenclature: ProductWithoutIdVariantsCustomsTariffCodesNomenclature.HSCode,
-          },
-        ],
+  const res = await sdk.products.postProducts({
+    id: "<ID>",
+    media: [
+      {},
+    ],
+    variants: [
+      {
+        customs: {
+          tariffCodes: [
+            {},
+          ],
+        },
+        dimensions: {},
+        media: {},
+        pricingDetails: {},
+        tags: {},
       },
-      barcode: "Legacy Toys",
-      carrier: "purport South firewall",
-      color: "gold",
-      countryOfOrigin: "useless Baby",
-      createdAt: "Data Fantastic technologies",
-      deliveryTime: 1598.78,
-      deliveryType: "monitor",
-      dimensions: {
-        height: 5110.22,
-        length: 9981.54,
-        unitSize: "alias didactic",
-        unitWeight: "COM turquoise Optimized",
-        weight: 6071.19,
-        width: 8455.61,
-      },
-      id: "<ID>",
-      media: {
-        type: "virtual",
-        url: "http://disloyal-advertisement.name",
-      },
-      name: "Oregon",
-      orderMax: 1152.23,
-      orderMin: 657.27,
-      pieces: 8684.35,
-      platformId: "noisily man",
-      pricingDetails: {
-        formerPrice: 6739.48,
-        isoCurrencyCode: "Electronics Berkshire",
-        price: 7815.49,
-        suggestedPrice: 3347.96,
-        taxRate: ProductWithoutIdVariantsPricingDetailsTaxRate.Free,
-        unitCost: 1560.6,
-      },
-      replacement: false,
-      replacementTime: 4562.95,
-      requiresShipping: false,
-      size: "Soul Costa",
-      sku: "framework",
-      status: "Touring",
-      tags: {
-        language: "Yttrium",
-        name: "Passenger Towels under",
-        value: "ADP recusandae",
-      },
-      totalStock: 5611.58,
-      unitType: ProductWithoutIdVariantsUnitType.Weight,
-      updatedAt: "synergistic",
-      variantId: "a",
-    },
-  ],
-}).then((res: PostProductsResponse) => {
+    ],
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

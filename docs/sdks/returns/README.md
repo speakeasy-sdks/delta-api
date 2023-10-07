@@ -18,22 +18,23 @@ Get a specific return
 
 ```typescript
 import { Delta } from "delta";
-import { GetReturnByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.returns.getReturnById({
-  returnId: "benchmark",
-}).then((res: GetReturnByIdResponse) => {
+  const res = await sdk.returns.getReturnById({
+    returnId: "benchmark",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -57,50 +58,31 @@ Create a new return
 
 ```typescript
 import { Delta } from "delta";
-import { PostReturnsResponse } from "delta/dist/sdk/models/operations";
 import { ReturnWithoutIdReturnedOrdersReturnedItemsCondition, ReturnWithoutIdStatus } from "delta/dist/sdk/models/shared";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
-
-sdk.returns.postReturns({
-  carrier: "around Northwest extremely",
-  connectionId: "Mobility generating but",
-  createdAt: "Intelligent",
-  id: "<ID>",
-  platformId: "Erbium",
-  quantity: 2428.77,
-  returnedOrders: [
-    {
-      id: 1714.06,
-      platformId: "phooey",
-      returnedItems: [
-        {
-          barcode: "repurpose Kia Tuna",
-          condition: ReturnWithoutIdReturnedOrdersReturnedItemsCondition.Used,
-          id: 4100.32,
-          platformId: "Helium Pound",
-          quantity: 3670.01,
-          reason: "generating",
-          sku: "Program revolutionize Massachusetts",
-          variantId: "Unbranded Mazda Bedfordshire",
-        },
-      ],
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
     },
-  ],
-  shopperMessage: "Internal",
-  status: ReturnWithoutIdStatus.Other,
-  trackingNumber: "static",
-  updatedAt: "West Southeast",
-}).then((res: PostReturnsResponse) => {
+  });
+
+  const res = await sdk.returns.postReturns({
+    id: "<ID>",
+    returnedOrders: [
+      {
+        returnedItems: [
+          {},
+        ],
+      },
+    ],
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

@@ -18,20 +18,21 @@ Get all journal entries
 
 ```typescript
 import { Delta } from "delta";
-import { GetJournalEntriesResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.journalEntries.getJournalEntries().then((res: GetJournalEntriesResponse) => {
+  const res = await sdk.journalEntries.getJournalEntries();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -54,22 +55,23 @@ Get a specific journal entry
 
 ```typescript
 import { Delta } from "delta";
-import { GetJournalEntryByIdResponse } from "delta/dist/sdk/models/operations";
 
-const sdk = new Delta({
-  security: {
-    authorization: "",
-    platformKey: "",
-  },
-});
+(async() => {
+  const sdk = new Delta({
+    security: {
+      authorization: "",
+      platformKey: "",
+    },
+  });
 
-sdk.journalEntries.getJournalEntryById({
-  id: "<ID>",
-}).then((res: GetJournalEntryByIdResponse) => {
+  const res = await sdk.journalEntries.getJournalEntryById({
+    id: "<ID>",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
