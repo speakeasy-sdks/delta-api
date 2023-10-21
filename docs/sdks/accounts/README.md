@@ -28,7 +28,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.accounts.getAccountById({
-    accountId: "man Honda Pants",
+    accountId: "string",
   });
 
   if (res.statusCode == 200) {

@@ -28,7 +28,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.location.getLocationById({
-    locationId: "Implementation tempore connect",
+    locationId: "string",
   });
 
   if (res.statusCode == 200) {

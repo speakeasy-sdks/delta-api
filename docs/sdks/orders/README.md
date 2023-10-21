@@ -30,7 +30,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.orders.getOrderById({
-    orderId: "enhance Northeast",
+    orderId: "string",
   });
 
   if (res.statusCode == 200) {
@@ -136,7 +136,7 @@ import {
       ],
       shippingAddress: {},
     },
-    orderId: "white success South",
+    orderId: "string",
   });
 
   if (res.statusCode == 200) {

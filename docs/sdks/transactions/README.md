@@ -28,7 +28,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.transactions.getTransactionById({
-    transactionId: "but",
+    transactionId: "string",
   });
 
   if (res.statusCode == 200) {

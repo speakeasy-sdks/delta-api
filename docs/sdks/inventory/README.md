@@ -66,7 +66,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.inventory.getInvetoryById({
-    inventoryId: "Bayer",
+    inventoryId: "string",
   });
 
   if (res.statusCode == 200) {
@@ -107,9 +107,9 @@ import { Delta } from "delta";
 
   const res = await sdk.inventory.postSetInventories({
     id: "<ID>",
-    locationPlatformId: "Tugrik",
-    sku: "Cargo",
-    totalStock: 8319.18,
+    locationPlatformId: "string",
+    sku: "string",
+    totalStock: 1166.55,
   });
 
   if (res.statusCode == 200) {

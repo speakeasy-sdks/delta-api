@@ -28,7 +28,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.returns.getReturnById({
-    returnId: "benchmark",
+    returnId: "string",
   });
 
   if (res.statusCode == 200) {

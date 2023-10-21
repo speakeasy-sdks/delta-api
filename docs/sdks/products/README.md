@@ -29,7 +29,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.products.getProductById({
-    productId: "Wagon Israeli",
+    productId: "string",
   });
 
   if (res.statusCode == 200) {
