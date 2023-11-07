@@ -1,5 +1,5 @@
 # Fulfillments
-(*fulfillments*)
+(*.fulfillments*)
 
 ## Overview
 
@@ -31,6 +31,7 @@ import { Delta } from "delta";
     id: "<ID>",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -58,7 +59,7 @@ Create a new fulfillment
 
 ```typescript
 import { Delta } from "delta";
-import { FulfillmentUnitWeight } from "delta/dist/sdk/models/shared";
+import { UnitWeight } from "delta/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new Delta({
@@ -77,6 +78,7 @@ import { FulfillmentUnitWeight } from "delta/dist/sdk/models/shared";
       {},
     ],
   });
+
 
   if (res.statusCode == 200) {
     // handle response

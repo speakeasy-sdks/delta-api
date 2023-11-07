@@ -8,13 +8,13 @@ import { Expose, Type } from "class-transformer";
 /**
  * The condition of the returned items. Can be one of like_new, used, or damaged.
  */
-export enum ReturnWithoutIdReturnedOrdersReturnedItemsCondition {
+export enum ReturnWithoutIdCondition {
     LikeNew = "like_new",
     Used = "used",
     Damaged = "damaged",
 }
 
-export class ReturnWithoutIdReturnedOrdersReturnedItems extends SpeakeasyBase {
+export class ReturnWithoutIdReturnedItems extends SpeakeasyBase {
     /**
      * The barcode for the item.
      */
@@ -27,7 +27,7 @@ export class ReturnWithoutIdReturnedOrdersReturnedItems extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "condition" })
-    condition?: ReturnWithoutIdReturnedOrdersReturnedItemsCondition;
+    condition?: ReturnWithoutIdCondition;
 
     /**
      * Unique identifier of the line item within delta.
@@ -90,10 +90,10 @@ export class ReturnWithoutIdReturnedOrders extends SpeakeasyBase {
     /**
      * The list of returned items.
      */
-    @SpeakeasyMetadata({ elemType: ReturnWithoutIdReturnedOrdersReturnedItems })
+    @SpeakeasyMetadata({ elemType: ReturnWithoutIdReturnedItems })
     @Expose({ name: "returned_items" })
-    @Type(() => ReturnWithoutIdReturnedOrdersReturnedItems)
-    returnedItems?: ReturnWithoutIdReturnedOrdersReturnedItems[];
+    @Type(() => ReturnWithoutIdReturnedItems)
+    returnedItems?: ReturnWithoutIdReturnedItems[];
 }
 
 /**

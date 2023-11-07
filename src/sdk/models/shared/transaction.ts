@@ -8,7 +8,7 @@ import { Expose } from "class-transformer";
 /**
  * One of cash, card, or other.
  */
-export enum TransactionPaymentMethod {
+export enum PaymentMethod {
     Card = "card",
     Cash = "cash",
     Other = "other",
@@ -83,7 +83,7 @@ export class Transaction extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "payment_method" })
-    paymentMethod?: TransactionPaymentMethod;
+    paymentMethod?: PaymentMethod;
 
     /**
      * The platform-specific ID of the transaction.

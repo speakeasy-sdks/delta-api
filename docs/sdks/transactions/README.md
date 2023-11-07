@@ -1,5 +1,5 @@
 # Transactions
-(*transactions*)
+(*.transactions*)
 
 ## Overview
 
@@ -30,6 +30,7 @@ import { Delta } from "delta";
   const res = await sdk.transactions.getTransactionById({
     transactionId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -68,6 +69,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.transactions.getTransactions();
+
 
   if (res.statusCode == 200) {
     // handle response

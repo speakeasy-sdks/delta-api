@@ -1,5 +1,5 @@
 # Location
-(*location*)
+(*.location*)
 
 ## Overview
 
@@ -30,6 +30,7 @@ import { Delta } from "delta";
   const res = await sdk.location.getLocationById({
     locationId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -71,6 +72,7 @@ import { LocationStatus, LocationType } from "delta/dist/sdk/models/shared";
   const res = await sdk.location.postLocation({
     id: "<ID>",
   });
+
 
   if (res.statusCode == 200) {
     // handle response

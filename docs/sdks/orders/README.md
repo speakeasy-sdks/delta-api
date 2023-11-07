@@ -1,5 +1,5 @@
 # Orders
-(*orders*)
+(*.orders*)
 
 ## Overview
 
@@ -32,6 +32,7 @@ import { Delta } from "delta";
   const res = await sdk.orders.getOrderById({
     orderId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -72,6 +73,7 @@ import { RFCDate } from "delta/dist/sdk/types";
 
   const res = await sdk.orders.getOrders({});
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -100,10 +102,10 @@ Update a specific order
 ```typescript
 import { Delta } from "delta";
 import {
-  FulfillmentUnitWeight,
   OrderWithoutIdFulfillmentStatus,
   OrderWithoutIdPaymentStatus,
   OrderWithoutIdStatus,
+  UnitWeight,
 } from "delta/dist/sdk/models/shared";
 
 (async() => {
@@ -139,6 +141,7 @@ import {
     orderId: "string",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -167,10 +170,10 @@ Create a new order
 ```typescript
 import { Delta } from "delta";
 import {
-  FulfillmentUnitWeight,
   OrderWithoutIdFulfillmentStatus,
   OrderWithoutIdPaymentStatus,
   OrderWithoutIdStatus,
+  UnitWeight,
 } from "delta/dist/sdk/models/shared";
 
 (async() => {
@@ -202,6 +205,7 @@ import {
     ],
     shippingAddress: {},
   });
+
 
   if (res.statusCode == 200) {
     // handle response

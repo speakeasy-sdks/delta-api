@@ -115,7 +115,7 @@ export enum OrderWithoutIdFulfillmentStatus {
 /**
  * Inventory.
  */
-export class OrderWithoutIdLineItemsInventory extends SpeakeasyBase {}
+export class OrderWithoutIdInventory extends SpeakeasyBase {}
 
 export class OrderWithoutIdLineItems extends SpeakeasyBase {
     /**
@@ -165,8 +165,8 @@ export class OrderWithoutIdLineItems extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "inventory" })
-    @Type(() => OrderWithoutIdLineItemsInventory)
-    inventory?: OrderWithoutIdLineItemsInventory;
+    @Type(() => OrderWithoutIdInventory)
+    inventory?: OrderWithoutIdInventory;
 
     /**
      * The currency of the item. (ISO 4217).

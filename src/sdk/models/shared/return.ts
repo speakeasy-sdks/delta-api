@@ -8,13 +8,13 @@ import { Expose, Type } from "class-transformer";
 /**
  * The condition of the returned items. Can be one of like_new, used, or damaged.
  */
-export enum ReturnReturnedOrdersReturnedItemsCondition {
+export enum Condition {
     LikeNew = "like_new",
     Used = "used",
     Damaged = "damaged",
 }
 
-export class ReturnReturnedOrdersReturnedItems extends SpeakeasyBase {
+export class ReturnedItems extends SpeakeasyBase {
     /**
      * The barcode for the item.
      */
@@ -27,7 +27,7 @@ export class ReturnReturnedOrdersReturnedItems extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "condition" })
-    condition?: ReturnReturnedOrdersReturnedItemsCondition;
+    condition?: Condition;
 
     /**
      * Unique identifier of the line item within delta.
@@ -72,7 +72,7 @@ export class ReturnReturnedOrdersReturnedItems extends SpeakeasyBase {
     variantId?: string;
 }
 
-export class ReturnReturnedOrders extends SpeakeasyBase {
+export class ReturnedOrders extends SpeakeasyBase {
     /**
      * Unique identifier of the order within delta.
      */
@@ -90,10 +90,10 @@ export class ReturnReturnedOrders extends SpeakeasyBase {
     /**
      * The list of returned items.
      */
-    @SpeakeasyMetadata({ elemType: ReturnReturnedOrdersReturnedItems })
+    @SpeakeasyMetadata({ elemType: ReturnedItems })
     @Expose({ name: "returned_items" })
-    @Type(() => ReturnReturnedOrdersReturnedItems)
-    returnedItems?: ReturnReturnedOrdersReturnedItems[];
+    @Type(() => ReturnedItems)
+    returnedItems?: ReturnedItems[];
 }
 
 /**
@@ -154,10 +154,10 @@ export class Return extends SpeakeasyBase {
     /**
      * The orders and products of the return.
      */
-    @SpeakeasyMetadata({ elemType: ReturnReturnedOrders })
+    @SpeakeasyMetadata({ elemType: ReturnedOrders })
     @Expose({ name: "returned_orders" })
-    @Type(() => ReturnReturnedOrders)
-    returnedOrders?: ReturnReturnedOrders[];
+    @Type(() => ReturnedOrders)
+    returnedOrders?: ReturnedOrders[];
 
     /**
      * A message of the shopper for the return.

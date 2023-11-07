@@ -1,5 +1,5 @@
 # JournalEntries
-(*journalEntries*)
+(*.journalEntries*)
 
 ## Overview
 
@@ -28,6 +28,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.journalEntries.getJournalEntries();
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -67,6 +68,7 @@ import { Delta } from "delta";
   const res = await sdk.journalEntries.getJournalEntryById({
     id: "<ID>",
   });
+
 
   if (res.statusCode == 200) {
     // handle response

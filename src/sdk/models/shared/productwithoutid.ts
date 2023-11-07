@@ -24,14 +24,14 @@ export class ProductWithoutIdMedia extends SpeakeasyBase {
 /**
  * Nomenclature of the tariff code
  */
-export enum ProductWithoutIdVariantsCustomsTariffCodesNomenclature {
+export enum ProductWithoutIdNomenclature {
     Taric = "TARIC",
     Instrastat = "Instrastat",
     HSCode = "HS-Code",
     Other = "Other",
 }
 
-export class ProductWithoutIdVariantsCustomsTariffCodes extends SpeakeasyBase {
+export class ProductWithoutIdTariffCodes extends SpeakeasyBase {
     /**
      * The tariff code
      */
@@ -51,23 +51,23 @@ export class ProductWithoutIdVariantsCustomsTariffCodes extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nomenclature" })
-    nomenclature?: ProductWithoutIdVariantsCustomsTariffCodesNomenclature;
+    nomenclature?: ProductWithoutIdNomenclature;
 }
 
-export class ProductWithoutIdVariantsCustoms extends SpeakeasyBase {
+export class ProductWithoutIdCustoms extends SpeakeasyBase {
     /**
      * Array of tariff codes
      */
-    @SpeakeasyMetadata({ elemType: ProductWithoutIdVariantsCustomsTariffCodes })
+    @SpeakeasyMetadata({ elemType: ProductWithoutIdTariffCodes })
     @Expose({ name: "tariff_codes" })
-    @Type(() => ProductWithoutIdVariantsCustomsTariffCodes)
-    tariffCodes?: ProductWithoutIdVariantsCustomsTariffCodes[];
+    @Type(() => ProductWithoutIdTariffCodes)
+    tariffCodes?: ProductWithoutIdTariffCodes[];
 }
 
 /**
  * The size and weight information of the item..
  */
-export class ProductWithoutIdVariantsDimensions extends SpeakeasyBase {
+export class ProductWithoutIdDimensions extends SpeakeasyBase {
     /**
      * The height of the item.
      */
@@ -114,7 +114,7 @@ export class ProductWithoutIdVariantsDimensions extends SpeakeasyBase {
 /**
  * The media files of the item.
  */
-export class ProductWithoutIdVariantsMedia extends SpeakeasyBase {
+export class ProductWithoutIdSchemasMedia extends SpeakeasyBase {
     /**
      * The type of the media file.
      */
@@ -133,7 +133,7 @@ export class ProductWithoutIdVariantsMedia extends SpeakeasyBase {
 /**
  * The tax rate of the item.
  */
-export enum ProductWithoutIdVariantsPricingDetailsTaxRate {
+export enum ProductWithoutIdTaxRate {
     Reduced = "reduced",
     Normal = "normal",
     Free = "free",
@@ -142,7 +142,7 @@ export enum ProductWithoutIdVariantsPricingDetailsTaxRate {
 /**
  * The price information about the item.
  */
-export class ProductWithoutIdVariantsPricingDetails extends SpeakeasyBase {
+export class ProductWithoutIdPricingDetails extends SpeakeasyBase {
     /**
      * The former gross retail price of the item.
      */
@@ -176,7 +176,7 @@ export class ProductWithoutIdVariantsPricingDetails extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "tax_rate" })
-    taxRate?: ProductWithoutIdVariantsPricingDetailsTaxRate;
+    taxRate?: ProductWithoutIdTaxRate;
 
     /**
      * The unit cost of the item.
@@ -189,7 +189,7 @@ export class ProductWithoutIdVariantsPricingDetails extends SpeakeasyBase {
 /**
  * The individual tags or attributes of the item.
  */
-export class ProductWithoutIdVariantsTags extends SpeakeasyBase {
+export class ProductWithoutIdTags extends SpeakeasyBase {
     /**
      * The language of the tag or attribute. (ISO 639)
      */
@@ -215,7 +215,7 @@ export class ProductWithoutIdVariantsTags extends SpeakeasyBase {
 /**
  * The unit type of the item.
  */
-export enum ProductWithoutIdVariantsUnitType {
+export enum ProductWithoutIdUnitType {
     Piece = "piece",
     Weight = "weight",
 }
@@ -223,8 +223,8 @@ export enum ProductWithoutIdVariantsUnitType {
 export class ProductWithoutIdVariants extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "Customs" })
-    @Type(() => ProductWithoutIdVariantsCustoms)
-    customs?: ProductWithoutIdVariantsCustoms;
+    @Type(() => ProductWithoutIdCustoms)
+    customs?: ProductWithoutIdCustoms;
 
     /**
      * The barcode for the item.
@@ -280,8 +280,8 @@ export class ProductWithoutIdVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "dimensions" })
-    @Type(() => ProductWithoutIdVariantsDimensions)
-    dimensions?: ProductWithoutIdVariantsDimensions;
+    @Type(() => ProductWithoutIdDimensions)
+    dimensions?: ProductWithoutIdDimensions;
 
     /**
      * Unique identifier of the variant within delta.
@@ -295,8 +295,8 @@ export class ProductWithoutIdVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "media" })
-    @Type(() => ProductWithoutIdVariantsMedia)
-    media?: ProductWithoutIdVariantsMedia;
+    @Type(() => ProductWithoutIdSchemasMedia)
+    media?: ProductWithoutIdSchemasMedia;
 
     /**
      * The name of the item.
@@ -338,8 +338,8 @@ export class ProductWithoutIdVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pricing_details" })
-    @Type(() => ProductWithoutIdVariantsPricingDetails)
-    pricingDetails?: ProductWithoutIdVariantsPricingDetails;
+    @Type(() => ProductWithoutIdPricingDetails)
+    pricingDetails?: ProductWithoutIdPricingDetails;
 
     /**
      * Boolean flag whether the item is replaceable.
@@ -388,8 +388,8 @@ export class ProductWithoutIdVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "tags" })
-    @Type(() => ProductWithoutIdVariantsTags)
-    tags?: ProductWithoutIdVariantsTags;
+    @Type(() => ProductWithoutIdTags)
+    tags?: ProductWithoutIdTags;
 
     /**
      * The total stock of the item.
@@ -403,7 +403,7 @@ export class ProductWithoutIdVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "unit_type" })
-    unitType?: ProductWithoutIdVariantsUnitType;
+    unitType?: ProductWithoutIdUnitType;
 
     /**
      * The date when the variant was last updated. (ISO 8601)

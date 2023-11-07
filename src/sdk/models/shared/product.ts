@@ -5,7 +5,7 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
-export class ProductMedia extends SpeakeasyBase {
+export class Media extends SpeakeasyBase {
     /**
      * The type of the media file.
      */
@@ -24,14 +24,14 @@ export class ProductMedia extends SpeakeasyBase {
 /**
  * Nomenclature of the tariff code
  */
-export enum ProductVariantsCustomsTariffCodesNomenclature {
+export enum Nomenclature {
     Taric = "TARIC",
     Instrastat = "Instrastat",
     HSCode = "HS-Code",
     Other = "Other",
 }
 
-export class ProductVariantsCustomsTariffCodes extends SpeakeasyBase {
+export class TariffCodes extends SpeakeasyBase {
     /**
      * The tariff code
      */
@@ -51,23 +51,23 @@ export class ProductVariantsCustomsTariffCodes extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nomenclature" })
-    nomenclature?: ProductVariantsCustomsTariffCodesNomenclature;
+    nomenclature?: Nomenclature;
 }
 
-export class ProductVariantsCustoms extends SpeakeasyBase {
+export class Customs extends SpeakeasyBase {
     /**
      * Array of tariff codes
      */
-    @SpeakeasyMetadata({ elemType: ProductVariantsCustomsTariffCodes })
+    @SpeakeasyMetadata({ elemType: TariffCodes })
     @Expose({ name: "tariff_codes" })
-    @Type(() => ProductVariantsCustomsTariffCodes)
-    tariffCodes?: ProductVariantsCustomsTariffCodes[];
+    @Type(() => TariffCodes)
+    tariffCodes?: TariffCodes[];
 }
 
 /**
  * The size and weight information of the item..
  */
-export class ProductVariantsDimensions extends SpeakeasyBase {
+export class Dimensions extends SpeakeasyBase {
     /**
      * The height of the item.
      */
@@ -114,7 +114,7 @@ export class ProductVariantsDimensions extends SpeakeasyBase {
 /**
  * The media files of the item.
  */
-export class ProductVariantsMedia extends SpeakeasyBase {
+export class ProductMedia extends SpeakeasyBase {
     /**
      * The type of the media file.
      */
@@ -133,7 +133,7 @@ export class ProductVariantsMedia extends SpeakeasyBase {
 /**
  * The tax rate of the item.
  */
-export enum ProductVariantsPricingDetailsTaxRate {
+export enum TaxRate {
     Reduced = "reduced",
     Normal = "normal",
     Free = "free",
@@ -142,7 +142,7 @@ export enum ProductVariantsPricingDetailsTaxRate {
 /**
  * The price information about the item.
  */
-export class ProductVariantsPricingDetails extends SpeakeasyBase {
+export class PricingDetails extends SpeakeasyBase {
     /**
      * The former gross retail price of the item.
      */
@@ -176,7 +176,7 @@ export class ProductVariantsPricingDetails extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "tax_rate" })
-    taxRate?: ProductVariantsPricingDetailsTaxRate;
+    taxRate?: TaxRate;
 
     /**
      * The unit cost of the item.
@@ -189,7 +189,7 @@ export class ProductVariantsPricingDetails extends SpeakeasyBase {
 /**
  * The individual tags or attributes of the item.
  */
-export class ProductVariantsTags extends SpeakeasyBase {
+export class Tags extends SpeakeasyBase {
     /**
      * The language of the tag or attribute. (ISO 639)
      */
@@ -215,16 +215,16 @@ export class ProductVariantsTags extends SpeakeasyBase {
 /**
  * The unit type of the item.
  */
-export enum ProductVariantsUnitType {
+export enum UnitType {
     Piece = "piece",
     Weight = "weight",
 }
 
-export class ProductVariants extends SpeakeasyBase {
+export class Variants extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "Customs" })
-    @Type(() => ProductVariantsCustoms)
-    customs?: ProductVariantsCustoms;
+    @Type(() => Customs)
+    customs?: Customs;
 
     /**
      * The barcode for the item.
@@ -280,8 +280,8 @@ export class ProductVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "dimensions" })
-    @Type(() => ProductVariantsDimensions)
-    dimensions?: ProductVariantsDimensions;
+    @Type(() => Dimensions)
+    dimensions?: Dimensions;
 
     /**
      * Unique identifier of the variant within delta.
@@ -295,8 +295,8 @@ export class ProductVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "media" })
-    @Type(() => ProductVariantsMedia)
-    media?: ProductVariantsMedia;
+    @Type(() => ProductMedia)
+    media?: ProductMedia;
 
     /**
      * The name of the item.
@@ -338,8 +338,8 @@ export class ProductVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pricing_details" })
-    @Type(() => ProductVariantsPricingDetails)
-    pricingDetails?: ProductVariantsPricingDetails;
+    @Type(() => PricingDetails)
+    pricingDetails?: PricingDetails;
 
     /**
      * Boolean flag whether the item is replaceable.
@@ -388,8 +388,8 @@ export class ProductVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "tags" })
-    @Type(() => ProductVariantsTags)
-    tags?: ProductVariantsTags;
+    @Type(() => Tags)
+    tags?: Tags;
 
     /**
      * The total stock of the item.
@@ -403,7 +403,7 @@ export class ProductVariants extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "unit_type" })
-    unitType?: ProductVariantsUnitType;
+    unitType?: UnitType;
 
     /**
      * The date when the variant was last updated. (ISO 8601)
@@ -459,10 +459,10 @@ export class Product extends SpeakeasyBase {
     /**
      * The media files of the product.
      */
-    @SpeakeasyMetadata({ elemType: ProductMedia })
+    @SpeakeasyMetadata({ elemType: Media })
     @Expose({ name: "media" })
-    @Type(() => ProductMedia)
-    media?: ProductMedia[];
+    @Type(() => Media)
+    media?: Media[];
 
     /**
      * The name of the product.
@@ -495,8 +495,8 @@ export class Product extends SpeakeasyBase {
     /**
      * Variant of the product
      */
-    @SpeakeasyMetadata({ elemType: ProductVariants })
+    @SpeakeasyMetadata({ elemType: Variants })
     @Expose({ name: "variants" })
-    @Type(() => ProductVariants)
-    variants?: ProductVariants[];
+    @Type(() => Variants)
+    variants?: Variants[];
 }

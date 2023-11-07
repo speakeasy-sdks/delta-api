@@ -1,5 +1,5 @@
 # Inventory
-(*inventory*)
+(*.inventory*)
 
 ## Overview
 
@@ -29,6 +29,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.inventory.getInvetory();
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -68,6 +69,7 @@ import { Delta } from "delta";
   const res = await sdk.inventory.getInvetoryById({
     inventoryId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -111,6 +113,7 @@ import { Delta } from "delta";
     sku: "string",
     totalStock: 1166.55,
   });
+
 
   if (res.statusCode == 200) {
     // handle response

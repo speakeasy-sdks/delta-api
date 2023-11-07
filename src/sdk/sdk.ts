@@ -3,12 +3,12 @@
  */
 
 import * as utils from "../internal/utils";
+import * as shared from "../sdk/models/shared";
 import { Accounts } from "./accounts";
 import { Fulfillments } from "./fulfillments";
 import { Inventory } from "./inventory";
 import { JournalEntries } from "./journalentries";
 import { Location } from "./location";
-import * as shared from "./models/shared";
 import { Orders } from "./orders";
 import { Products } from "./products";
 import { Returns } from "./returns";
@@ -66,9 +66,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "1.0.0";
-    sdkVersion = "0.7.0";
-    genVersion = "2.171.0";
-    userAgent = "speakeasy-sdk/typescript 0.7.0 2.171.0 1.0.0 delta";
+    sdkVersion = "0.8.0";
+    genVersion = "2.181.1";
+    userAgent = "speakeasy-sdk/typescript 0.8.0 2.181.1 1.0.0 delta";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -84,33 +84,33 @@ export class Delta {
      */
     public accounts: Accounts;
     /**
-     * Provides the fulfillments information
-     */
-    public fulfillments: Fulfillments;
-    /**
      * Provides the inventory information
      */
     public inventory: Inventory;
-    /**
-     * Provides the journal entries information
-     */
-    public journalEntries: JournalEntries;
     /**
      * Provides the location information
      */
     public location: Location;
     /**
+     * Provides the journal entries information
+     */
+    public journalEntries: JournalEntries;
+    /**
      * Provides the orders information
      */
     public orders: Orders;
     /**
-     * Provides the products information
+     * Provides the fulfillments information
      */
-    public products: Products;
+    public fulfillments: Fulfillments;
     /**
      * Provides the returns information
      */
     public returns: Returns;
+    /**
+     * Provides the products information
+     */
+    public products: Products;
     /**
      * Provides the transactions information
      */
@@ -135,13 +135,13 @@ export class Delta {
         });
 
         this.accounts = new Accounts(this.sdkConfiguration);
-        this.fulfillments = new Fulfillments(this.sdkConfiguration);
         this.inventory = new Inventory(this.sdkConfiguration);
-        this.journalEntries = new JournalEntries(this.sdkConfiguration);
         this.location = new Location(this.sdkConfiguration);
+        this.journalEntries = new JournalEntries(this.sdkConfiguration);
         this.orders = new Orders(this.sdkConfiguration);
-        this.products = new Products(this.sdkConfiguration);
+        this.fulfillments = new Fulfillments(this.sdkConfiguration);
         this.returns = new Returns(this.sdkConfiguration);
+        this.products = new Products(this.sdkConfiguration);
         this.transactions = new Transactions(this.sdkConfiguration);
     }
 }

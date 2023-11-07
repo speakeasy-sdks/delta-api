@@ -9,7 +9,7 @@ import { Expose, Type } from "class-transformer";
 /**
  * Billing address for the order
  */
-export class OrderBillingAddress extends SpeakeasyBase {
+export class BillingAddress extends SpeakeasyBase {
     /**
      * The first address line of the address.
      */
@@ -105,7 +105,7 @@ export class OrderBillingAddress extends SpeakeasyBase {
 /**
  * Fulfillment status of the order on the connected platform, can be one of - NULL None of the line items in the order have been fulfilled. - FULFILLED Every line item in the order has been fulfilled. - PARTIALLY At least one line item in the order has been fulfilled. - RETURNED Every line item in the order has been returned and the order canceled.
  */
-export enum OrderFulfillmentStatus {
+export enum FulfillmentStatus {
     Null = "NULL",
     Fulfilled = "FULFILLED",
     Partially = "PARTIALLY",
@@ -115,7 +115,7 @@ export enum OrderFulfillmentStatus {
 /**
  * Inventory.
  */
-export class OrderLineItemsInventory extends SpeakeasyBase {}
+export class OrderInventory extends SpeakeasyBase {}
 
 export class OrderLineItems extends SpeakeasyBase {
     /**
@@ -165,8 +165,8 @@ export class OrderLineItems extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "inventory" })
-    @Type(() => OrderLineItemsInventory)
-    inventory?: OrderLineItemsInventory;
+    @Type(() => OrderInventory)
+    inventory?: OrderInventory;
 
     /**
      * The currency of the item. (ISO 4217).
@@ -291,7 +291,7 @@ export class OrderLineItems extends SpeakeasyBase {
 /**
  * Payment status of the order on the connected platform.
  */
-export enum OrderPaymentStatus {
+export enum PaymentStatus {
     Payed = "PAYED",
     NotPayed = "NOT_PAYED",
     Lost = "LOST",
@@ -300,7 +300,7 @@ export enum OrderPaymentStatus {
 /**
  * Billing address for the order
  */
-export class OrderShippingAddress extends SpeakeasyBase {
+export class ShippingAddress extends SpeakeasyBase {
     /**
      * The first address line of the address.
      */
@@ -394,8 +394,8 @@ export class Order extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "billing_address" })
-    @Type(() => OrderBillingAddress)
-    billingAddress?: OrderBillingAddress;
+    @Type(() => BillingAddress)
+    billingAddress?: BillingAddress;
 
     /**
      * Name of the channel on the platform.
@@ -437,7 +437,7 @@ export class Order extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "fulfillment_status" })
-    fulfillmentStatus?: OrderFulfillmentStatus;
+    fulfillmentStatus?: FulfillmentStatus;
 
     /**
      * Fulfillments of the order
@@ -502,7 +502,7 @@ export class Order extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "payment_status" })
-    paymentStatus?: OrderPaymentStatus;
+    paymentStatus?: PaymentStatus;
 
     /**
      * Name of the connected platform.
@@ -523,8 +523,8 @@ export class Order extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "shipping_address" })
-    @Type(() => OrderShippingAddress)
-    shippingAddress?: OrderShippingAddress;
+    @Type(() => ShippingAddress)
+    shippingAddress?: ShippingAddress;
 
     /**
      * Status of the order on the connected platform.

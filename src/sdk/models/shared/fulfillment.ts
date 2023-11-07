@@ -5,7 +5,7 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
-export class FulfillmentLineItems extends SpeakeasyBase {
+export class LineItems extends SpeakeasyBase {
     /**
      * The platform-specific ID of the line_items.
      */
@@ -21,7 +21,7 @@ export class FulfillmentLineItems extends SpeakeasyBase {
     quantity?: string;
 }
 
-export class FulfillmentOrders extends SpeakeasyBase {
+export class Orders extends SpeakeasyBase {
     /**
      * The platform-specific ID of the order.
      */
@@ -33,7 +33,7 @@ export class FulfillmentOrders extends SpeakeasyBase {
 /**
  * The unit of weight of the parcels in this fulfillment.
  */
-export enum FulfillmentUnitWeight {
+export enum UnitWeight {
     Kg = "kg",
     G = "g",
     Lb = "lb",
@@ -79,18 +79,18 @@ export class Fulfillment extends SpeakeasyBase {
     /**
      * The line_items associated with the fulfillment.
      */
-    @SpeakeasyMetadata({ elemType: FulfillmentLineItems })
+    @SpeakeasyMetadata({ elemType: LineItems })
     @Expose({ name: "line_items" })
-    @Type(() => FulfillmentLineItems)
-    lineItems?: FulfillmentLineItems[];
+    @Type(() => LineItems)
+    lineItems?: LineItems[];
 
     /**
      * The orders associated with the fulfillment.
      */
-    @SpeakeasyMetadata({ elemType: FulfillmentOrders })
+    @SpeakeasyMetadata({ elemType: Orders })
     @Expose({ name: "orders" })
-    @Type(() => FulfillmentOrders)
-    orders?: FulfillmentOrders[];
+    @Type(() => Orders)
+    orders?: Orders[];
 
     /**
      * The number of parcels of the fulfillment.
@@ -139,7 +139,7 @@ export class Fulfillment extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "unit_weight" })
-    unitWeight?: FulfillmentUnitWeight;
+    unitWeight?: UnitWeight;
 
     /**
      * The date when the order was last updated. (ISO 8601)

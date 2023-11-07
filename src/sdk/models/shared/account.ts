@@ -8,7 +8,7 @@ import { Expose } from "class-transformer";
 /**
  * Cateogory of the account.
  */
-export enum AccountCategory {
+export enum Category {
     Asset = "asset",
     Expense = "expense",
     Income = "income",
@@ -20,7 +20,7 @@ export enum AccountCategory {
 /**
  * Status of the account.
  */
-export enum AccountStatus {
+export enum Status {
     Active = "active",
     Inactive = "inactive",
     Pending = "pending",
@@ -29,7 +29,7 @@ export enum AccountStatus {
 /**
  * Type of the account.
  */
-export enum AccountType {
+export enum TypeT {
     AccountsPayable = "accounts_payable",
     AccountsReceivable = "accounts_receivable",
     Bank = "bank",
@@ -63,7 +63,7 @@ export class Account extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "category" })
-    category?: AccountCategory;
+    category?: Category;
 
     /**
      * Unique identifier of the integration on delta.
@@ -119,14 +119,14 @@ export class Account extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })
-    status?: AccountStatus;
+    status?: Status;
 
     /**
      * Type of the account.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "type" })
-    type?: AccountType;
+    type?: TypeT;
 
     /**
      * Last update on the return of the integration platform

@@ -1,5 +1,5 @@
 # Products
-(*products*)
+(*.products*)
 
 ## Overview
 
@@ -31,6 +31,7 @@ import { Delta } from "delta";
   const res = await sdk.products.getProductById({
     productId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -70,6 +71,7 @@ import { Delta } from "delta";
 
   const res = await sdk.products.getProducts();
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -96,11 +98,7 @@ Create a new product
 
 ```typescript
 import { Delta } from "delta";
-import {
-  ProductWithoutIdVariantsCustomsTariffCodesNomenclature,
-  ProductWithoutIdVariantsPricingDetailsTaxRate,
-  ProductWithoutIdVariantsUnitType,
-} from "delta/dist/sdk/models/shared";
+import { ProductWithoutIdNomenclature, ProductWithoutIdTaxRate, ProductWithoutIdUnitType } from "delta/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new Delta({
@@ -129,6 +127,7 @@ import {
       },
     ],
   });
+
 
   if (res.statusCode == 200) {
     // handle response

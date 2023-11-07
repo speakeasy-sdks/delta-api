@@ -1,5 +1,5 @@
 # Accounts
-(*accounts*)
+(*.accounts*)
 
 ## Overview
 
@@ -30,6 +30,7 @@ import { Delta } from "delta";
   const res = await sdk.accounts.getAccountById({
     accountId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -68,6 +69,7 @@ import { Delta } from "delta";
   });
 
   const res = await sdk.accounts.getAccounts({});
+
 
   if (res.statusCode == 200) {
     // handle response

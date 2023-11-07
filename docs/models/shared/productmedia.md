@@ -1,5 +1,7 @@
 # ProductMedia
 
+The media files of the item.
+
 
 ## Fields
 

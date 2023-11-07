@@ -1,5 +1,5 @@
 # Returns
-(*returns*)
+(*.returns*)
 
 ## Overview
 
@@ -31,6 +31,7 @@ import { Delta } from "delta";
     returnId: "string",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -58,7 +59,7 @@ Create a new return
 
 ```typescript
 import { Delta } from "delta";
-import { ReturnWithoutIdReturnedOrdersReturnedItemsCondition, ReturnWithoutIdStatus } from "delta/dist/sdk/models/shared";
+import { ReturnWithoutIdCondition, ReturnWithoutIdStatus } from "delta/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new Delta({
@@ -78,6 +79,7 @@ import { ReturnWithoutIdReturnedOrdersReturnedItemsCondition, ReturnWithoutIdSta
       },
     ],
   });
+
 
   if (res.statusCode == 200) {
     // handle response
