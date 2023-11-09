@@ -1,5 +1,5 @@
 # JournalEntries
-(*.journalEntries*)
+(*journalEntries*)
 
 ## Overview
 
@@ -29,7 +29,6 @@ import { Delta } from "delta";
 
   const res = await sdk.journalEntries.getJournalEntries();
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -45,8 +44,13 @@ import { Delta } from "delta";
 
 ### Response
 
-**Promise<[operations.GetJournalEntriesResponse](../../models/operations/getjournalentriesresponse.md)>**
+**Promise<[operations.GetJournalEntriesResponse](../../sdk/models/operations/getjournalentriesresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## getJournalEntryById
 
@@ -69,7 +73,6 @@ import { Delta } from "delta";
     id: "<ID>",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -78,13 +81,18 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `request`                                                                                      | [operations.GetJournalEntryByIdRequest](../../models/operations/getjournalentrybyidrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `config`                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                   | :heavy_minus_sign:                                                                             | Available config options for making requests.                                                  |
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `request`                                                                                          | [operations.GetJournalEntryByIdRequest](../../sdk/models/operations/getjournalentrybyidrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `config`                                                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                       | :heavy_minus_sign:                                                                                 | Available config options for making requests.                                                      |
 
 
 ### Response
 
-**Promise<[operations.GetJournalEntryByIdResponse](../../models/operations/getjournalentrybyidresponse.md)>**
+**Promise<[operations.GetJournalEntryByIdResponse](../../sdk/models/operations/getjournalentrybyidresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |

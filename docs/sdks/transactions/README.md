@@ -1,5 +1,5 @@
 # Transactions
-(*.transactions*)
+(*transactions*)
 
 ## Overview
 
@@ -31,7 +31,6 @@ import { Delta } from "delta";
     transactionId: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -40,16 +39,21 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.GetTransactionByIdRequest](../../models/operations/gettransactionbyidrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `config`                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                 | :heavy_minus_sign:                                                                           | Available config options for making requests.                                                |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `request`                                                                                        | [operations.GetTransactionByIdRequest](../../sdk/models/operations/gettransactionbyidrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `config`                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                     | :heavy_minus_sign:                                                                               | Available config options for making requests.                                                    |
 
 
 ### Response
 
-**Promise<[operations.GetTransactionByIdResponse](../../models/operations/gettransactionbyidresponse.md)>**
+**Promise<[operations.GetTransactionByIdResponse](../../sdk/models/operations/gettransactionbyidresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## getTransactions
 
@@ -70,7 +74,6 @@ import { Delta } from "delta";
 
   const res = await sdk.transactions.getTransactions();
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -86,5 +89,10 @@ import { Delta } from "delta";
 
 ### Response
 
-**Promise<[operations.GetTransactionsResponse](../../models/operations/gettransactionsresponse.md)>**
+**Promise<[operations.GetTransactionsResponse](../../sdk/models/operations/gettransactionsresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |

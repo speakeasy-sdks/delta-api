@@ -51,51 +51,51 @@ import { Delta } from "delta";
 ## Available Resources and Operations
 
 
-### [.accounts](docs/sdks/accounts/README.md)
+### [accounts](docs/sdks/accounts/README.md)
 
 * [getAccountById](docs/sdks/accounts/README.md#getaccountbyid) - Get a specific account
 * [getAccounts](docs/sdks/accounts/README.md#getaccounts) - Get all accounts
 
-### [.inventory](docs/sdks/inventory/README.md)
+### [inventory](docs/sdks/inventory/README.md)
 
 * [getInvetory](docs/sdks/inventory/README.md#getinvetory) - Get all inventories
 * [getInvetoryById](docs/sdks/inventory/README.md#getinvetorybyid) - Get a specific inventory
 * [postSetInventories](docs/sdks/inventory/README.md#postsetinventories) - Update the stock level of an inventory item at a location
 
-### [.location](docs/sdks/location/README.md)
+### [location](docs/sdks/location/README.md)
 
 * [getLocationById](docs/sdks/location/README.md#getlocationbyid) - Get a specific location
 * [postLocation](docs/sdks/location/README.md#postlocation) - Create a new location
 
-### [.journalEntries](docs/sdks/journalentries/README.md)
+### [journalEntries](docs/sdks/journalentries/README.md)
 
 * [getJournalEntries](docs/sdks/journalentries/README.md#getjournalentries) - Get all journal entries
 * [getJournalEntryById](docs/sdks/journalentries/README.md#getjournalentrybyid) - Get a specific journal entry
 
-### [.orders](docs/sdks/orders/README.md)
+### [orders](docs/sdks/orders/README.md)
 
 * [getOrderById](docs/sdks/orders/README.md#getorderbyid) - Get an order by id
 * [getOrders](docs/sdks/orders/README.md#getorders) - Get all orders
 * [patchtOrders](docs/sdks/orders/README.md#patchtorders) - Update a specific order
 * [postOrders](docs/sdks/orders/README.md#postorders) - Create a new order
 
-### [.fulfillments](docs/sdks/fulfillments/README.md)
+### [fulfillments](docs/sdks/fulfillments/README.md)
 
 * [getFulfillmentById](docs/sdks/fulfillments/README.md#getfulfillmentbyid) - Get a specific fulfillment
 * [postFulfillments](docs/sdks/fulfillments/README.md#postfulfillments) - Create a new fulfillment
 
-### [.returns](docs/sdks/returns/README.md)
+### [returns](docs/sdks/returns/README.md)
 
 * [getReturnById](docs/sdks/returns/README.md#getreturnbyid) - Get a specific return
 * [postReturns](docs/sdks/returns/README.md#postreturns) - Create a new return
 
-### [.products](docs/sdks/products/README.md)
+### [products](docs/sdks/products/README.md)
 
 * [getProductById](docs/sdks/products/README.md#getproductbyid) - Get a specific product
 * [getProducts](docs/sdks/products/README.md#getproducts) - Get all products
 * [postProducts](docs/sdks/products/README.md#postproducts) - Create a new product
 
-### [.transactions](docs/sdks/transactions/README.md)
+### [transactions](docs/sdks/transactions/README.md)
 
 * [getTransactionById](docs/sdks/transactions/README.md#gettransactionbyid) - Provide a transaction by id
 * [getTransactions](docs/sdks/transactions/README.md#gettransactions) - Get all transactions
@@ -124,7 +124,12 @@ Here's an example of one such pagination call:
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 
 ## Example
@@ -147,11 +152,10 @@ import { Delta } from "delta";
     accountId: "string",
   });
   } catch (e) { 
-    if (e instanceof Error) {
+    if (e instanceof errors.ErrorT) {
       console.error(e) // handle exception 
     
   }
-
 
   if (res.statusCode == 200) {
     // handle response
@@ -249,19 +253,16 @@ const httpClient = axios.create({
 
 const sdk = new Delta({defaultClient: httpClient});
 ```
-
-
 <!-- End Custom HTTP Client -->
 
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security schemes globally:
+This SDK supports the following security schemes globally:
 
 | Name            | Type            | Scheme          |
 | --------------- | --------------- | --------------- |

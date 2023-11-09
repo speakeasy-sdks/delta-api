@@ -1,5 +1,5 @@
 # Products
-(*.products*)
+(*products*)
 
 ## Overview
 
@@ -32,7 +32,6 @@ import { Delta } from "delta";
     productId: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -41,16 +40,21 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `request`                                                                            | [operations.GetProductByIdRequest](../../models/operations/getproductbyidrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `config`                                                                             | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                         | :heavy_minus_sign:                                                                   | Available config options for making requests.                                        |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `request`                                                                                | [operations.GetProductByIdRequest](../../sdk/models/operations/getproductbyidrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `config`                                                                                 | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                             | :heavy_minus_sign:                                                                       | Available config options for making requests.                                            |
 
 
 ### Response
 
-**Promise<[operations.GetProductByIdResponse](../../models/operations/getproductbyidresponse.md)>**
+**Promise<[operations.GetProductByIdResponse](../../sdk/models/operations/getproductbyidresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## getProducts
 
@@ -71,7 +75,6 @@ import { Delta } from "delta";
 
   const res = await sdk.products.getProducts();
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -87,8 +90,13 @@ import { Delta } from "delta";
 
 ### Response
 
-**Promise<[operations.GetProductsResponse](../../models/operations/getproductsresponse.md)>**
+**Promise<[operations.GetProductsResponse](../../sdk/models/operations/getproductsresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## postProducts
 
@@ -128,7 +136,6 @@ import { ProductWithoutIdNomenclature, ProductWithoutIdTaxRate, ProductWithoutId
     ],
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -137,13 +144,18 @@ import { ProductWithoutIdNomenclature, ProductWithoutIdTaxRate, ProductWithoutId
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `request`                                                          | [shared.ProductWithoutId](../../models/shared/productwithoutid.md) | :heavy_check_mark:                                                 | The request object to use for the request.                         |
-| `config`                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)       | :heavy_minus_sign:                                                 | Available config options for making requests.                      |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `request`                                                              | [shared.ProductWithoutId](../../sdk/models/shared/productwithoutid.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
+| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |
 
 
 ### Response
 
-**Promise<[operations.PostProductsResponse](../../models/operations/postproductsresponse.md)>**
+**Promise<[operations.PostProductsResponse](../../sdk/models/operations/postproductsresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 400,409,500,502  | application/json |
+| errors.SDKError  | 400-600          | */*              |

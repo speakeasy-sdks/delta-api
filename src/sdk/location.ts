@@ -38,7 +38,11 @@ export class Location {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/inventories/locations/{location_id}", req);
+        const operationUrl: string = utils.generateURL(
+            baseURL,
+            "/inventories/locations/{location_id}",
+            req
+        );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -55,7 +59,7 @@ export class Location {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -132,7 +136,7 @@ export class Location {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/inventories/locations";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/inventories/locations";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -164,7 +168,7 @@ export class Location {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",

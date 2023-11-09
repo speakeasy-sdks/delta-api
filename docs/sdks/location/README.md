@@ -1,5 +1,5 @@
 # Location
-(*.location*)
+(*location*)
 
 ## Overview
 
@@ -31,7 +31,6 @@ import { Delta } from "delta";
     locationId: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -40,16 +39,21 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `request`                                                                              | [operations.GetLocationByIdRequest](../../models/operations/getlocationbyidrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `config`                                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                           | :heavy_minus_sign:                                                                     | Available config options for making requests.                                          |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `request`                                                                                  | [operations.GetLocationByIdRequest](../../sdk/models/operations/getlocationbyidrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `config`                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                               | :heavy_minus_sign:                                                                         | Available config options for making requests.                                              |
 
 
 ### Response
 
-**Promise<[operations.GetLocationByIdResponse](../../models/operations/getlocationbyidresponse.md)>**
+**Promise<[operations.GetLocationByIdResponse](../../sdk/models/operations/getlocationbyidresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## postLocation
 
@@ -73,7 +77,6 @@ import { LocationStatus, LocationType } from "delta/dist/sdk/models/shared";
     id: "<ID>",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -84,11 +87,16 @@ import { LocationStatus, LocationType } from "delta/dist/sdk/models/shared";
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `request`                                                    | [shared.Location](../../models/shared/location.md)           | :heavy_check_mark:                                           | The request object to use for the request.                   |
+| `request`                                                    | [shared.Location](../../sdk/models/shared/location.md)       | :heavy_check_mark:                                           | The request object to use for the request.                   |
 | `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
 
 
 ### Response
 
-**Promise<[operations.PostLocationResponse](../../models/operations/postlocationresponse.md)>**
+**Promise<[operations.PostLocationResponse](../../sdk/models/operations/postlocationresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 400,409,500,502  | application/json |
+| errors.SDKError  | 400-600          | */*              |

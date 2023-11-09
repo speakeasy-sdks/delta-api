@@ -1,5 +1,5 @@
 # Fulfillments
-(*.fulfillments*)
+(*fulfillments*)
 
 ## Overview
 
@@ -31,7 +31,6 @@ import { Delta } from "delta";
     id: "<ID>",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -40,16 +39,21 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.GetFulfillmentByIdRequest](../../models/operations/getfulfillmentbyidrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `config`                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                 | :heavy_minus_sign:                                                                           | Available config options for making requests.                                                |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `request`                                                                                        | [operations.GetFulfillmentByIdRequest](../../sdk/models/operations/getfulfillmentbyidrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `config`                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                     | :heavy_minus_sign:                                                                               | Available config options for making requests.                                                    |
 
 
 ### Response
 
-**Promise<[operations.GetFulfillmentByIdResponse](../../models/operations/getfulfillmentbyidresponse.md)>**
+**Promise<[operations.GetFulfillmentByIdResponse](../../sdk/models/operations/getfulfillmentbyidresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## postFulfillments
 
@@ -79,7 +83,6 @@ import { UnitWeight } from "delta/dist/sdk/models/shared";
     ],
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -90,11 +93,16 @@ import { UnitWeight } from "delta/dist/sdk/models/shared";
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `request`                                                    | [shared.Fulfillment](../../models/shared/fulfillment.md)     | :heavy_check_mark:                                           | The request object to use for the request.                   |
+| `request`                                                    | [shared.Fulfillment](../../sdk/models/shared/fulfillment.md) | :heavy_check_mark:                                           | The request object to use for the request.                   |
 | `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
 
 
 ### Response
 
-**Promise<[operations.PostFulfillmentsResponse](../../models/operations/postfulfillmentsresponse.md)>**
+**Promise<[operations.PostFulfillmentsResponse](../../sdk/models/operations/postfulfillmentsresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 400,409,500,502  | application/json |
+| errors.SDKError  | 400-600          | */*              |

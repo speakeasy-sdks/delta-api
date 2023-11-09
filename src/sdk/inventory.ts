@@ -31,7 +31,7 @@ export class Inventory {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/inventories";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/inventories";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -48,7 +48,7 @@ export class Inventory {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -125,7 +125,7 @@ export class Inventory {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/inventories/{inventoryId}", req);
+        const operationUrl: string = utils.generateURL(baseURL, "/inventories/{inventoryId}", req);
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -142,7 +142,7 @@ export class Inventory {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -219,7 +219,7 @@ export class Inventory {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/inventories/set";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/inventories/set";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -251,7 +251,7 @@ export class Inventory {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",

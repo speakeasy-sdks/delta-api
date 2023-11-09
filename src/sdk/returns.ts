@@ -38,7 +38,7 @@ export class Returns {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/orders/returns/{returnId}", req);
+        const operationUrl: string = utils.generateURL(baseURL, "/orders/returns/{returnId}", req);
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -55,7 +55,7 @@ export class Returns {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -132,7 +132,7 @@ export class Returns {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/orders/returns";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/orders/returns";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -164,7 +164,7 @@ export class Returns {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",

@@ -1,5 +1,5 @@
 # Inventory
-(*.inventory*)
+(*inventory*)
 
 ## Overview
 
@@ -30,7 +30,6 @@ import { Delta } from "delta";
 
   const res = await sdk.inventory.getInvetory();
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -46,8 +45,13 @@ import { Delta } from "delta";
 
 ### Response
 
-**Promise<[operations.GetInvetoryResponse](../../models/operations/getinvetoryresponse.md)>**
+**Promise<[operations.GetInvetoryResponse](../../sdk/models/operations/getinvetoryresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## getInvetoryById
 
@@ -70,7 +74,6 @@ import { Delta } from "delta";
     inventoryId: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -79,16 +82,21 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `request`                                                                              | [operations.GetInvetoryByIdRequest](../../models/operations/getinvetorybyidrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `config`                                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                           | :heavy_minus_sign:                                                                     | Available config options for making requests.                                          |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `request`                                                                                  | [operations.GetInvetoryByIdRequest](../../sdk/models/operations/getinvetorybyidrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `config`                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                               | :heavy_minus_sign:                                                                         | Available config options for making requests.                                              |
 
 
 ### Response
 
-**Promise<[operations.GetInvetoryByIdResponse](../../models/operations/getinvetorybyidresponse.md)>**
+**Promise<[operations.GetInvetoryByIdResponse](../../sdk/models/operations/getinvetorybyidresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 404,500,502      | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## postSetInventories
 
@@ -114,7 +122,6 @@ import { Delta } from "delta";
     totalStock: 1166.55,
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -123,13 +130,18 @@ import { Delta } from "delta";
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `request`                                                    | [shared.InventorySet](../../models/shared/inventoryset.md)   | :heavy_check_mark:                                           | The request object to use for the request.                   |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `request`                                                      | [shared.InventorySet](../../sdk/models/shared/inventoryset.md) | :heavy_check_mark:                                             | The request object to use for the request.                     |
+| `config`                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)   | :heavy_minus_sign:                                             | Available config options for making requests.                  |
 
 
 ### Response
 
-**Promise<[operations.PostSetInventoriesResponse](../../models/operations/postsetinventoriesresponse.md)>**
+**Promise<[operations.PostSetInventoriesResponse](../../sdk/models/operations/postsetinventoriesresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 400,409,500,502  | application/json |
+| errors.SDKError  | 400-600          | */*              |
