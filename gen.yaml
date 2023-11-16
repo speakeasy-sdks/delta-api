@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 0144fa487c5dc64a86bc992d5a8150cc
   docVersion: 1.0.0
-  speakeasyVersion: 1.118.3
-  generationVersion: 2.187.7
+  speakeasyVersion: 1.120.3
+  generationVersion: 2.192.1
 generation:
   comments: {}
   sdkClassName: delta
@@ -12,11 +12,11 @@ generation:
     optionalPropertyRendering: withExample
 features:
   typescript:
-    core: 3.1.3
+    core: 3.1.4
     globalSecurity: 2.82.0
     globalServerURLs: 2.82.0
 typescript:
-  version: 0.8.2
+  version: 0.8.3
   author: delta technologies GmbH
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false

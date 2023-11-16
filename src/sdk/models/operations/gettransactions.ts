@@ -23,7 +23,7 @@ export class GetTransactionsResponse extends SpeakeasyBase {
      * Raw HTTP response; suitable for custom response parsing
      */
     @SpeakeasyMetadata()
-    rawResponse?: AxiosResponse;
+    rawResponse: AxiosResponse;
 
     /**
      * The transactions corresponding to the provided `Platform-Key`
