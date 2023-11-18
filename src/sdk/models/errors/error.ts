@@ -5,6 +5,9 @@
 import { SpeakeasyMetadata } from "../../../internal/utils";
 import { classToPlain, Expose } from "class-transformer";
 
+/**
+ * No account found for the provided `accountId`
+ */
 export class ErrorT extends Error {
     /**
      * A human readable error message
