@@ -20,11 +20,11 @@ Get a specific product
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -35,7 +35,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -65,11 +67,11 @@ Get all products
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -78,7 +80,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -108,11 +112,11 @@ Create a new product
 import { Delta } from "delta";
 import { ProductWithoutIdNomenclature, ProductWithoutIdTaxRate, ProductWithoutIdUnitType } from "delta/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -139,7 +143,9 @@ import { ProductWithoutIdNomenclature, ProductWithoutIdTaxRate, ProductWithoutId
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

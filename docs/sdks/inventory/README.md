@@ -20,11 +20,11 @@ Get all inventories
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -33,7 +33,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -62,11 +64,11 @@ Get a specific inventory
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -77,7 +79,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -107,11 +111,11 @@ Update the stock level of an inventory item at a location.
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -125,7 +129,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

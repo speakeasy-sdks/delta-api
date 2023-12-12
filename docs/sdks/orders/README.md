@@ -21,11 +21,11 @@ Get a specific order
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -36,7 +36,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -67,11 +69,11 @@ Get all orders
 import { Delta } from "delta";
 import { RFCDate } from "delta/dist/sdk/types";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -80,7 +82,9 @@ import { RFCDate } from "delta/dist/sdk/types";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -116,11 +120,11 @@ import {
   UnitWeight,
 } from "delta/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -152,7 +156,9 @@ import {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -188,11 +194,11 @@ import {
   UnitWeight,
 } from "delta/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -221,7 +227,9 @@ import {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

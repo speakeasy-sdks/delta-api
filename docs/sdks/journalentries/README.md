@@ -19,11 +19,11 @@ Get all journal entries
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -32,7 +32,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -61,11 +63,11 @@ Get a specific journal entry
 ```typescript
 import { Delta } from "delta";
 
-(async() => {
+async function run() {
   const sdk = new Delta({
     security: {
-      authorization: "",
-      platformKey: "",
+      authorization: "<YOUR_BEARER_TOKEN_HERE>",
+      platformKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -76,7 +78,9 @@ import { Delta } from "delta";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
