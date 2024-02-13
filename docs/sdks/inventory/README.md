@@ -120,10 +120,14 @@ async function run() {
   });
 
   const res = await sdk.inventory.postSetInventories({
-    id: "<ID>",
-    locationPlatformId: "string",
-    sku: "string",
-    totalStock: 1166.55,
+    barcode: "5901234123457",
+    connectionId: "71f133b0-7936-4c46-8905-df646095537a",
+    id: "53f1e593-24d4-4110-8b2d-4e18d5461c33",
+    locationId: "53f1e593-24d4-4110-8b2d-4e18d5461c33",
+    locationPlatformId: "4523",
+    sku: "1234",
+    totalStock: 27,
+    variantId: "2522A",
   });
 
   if (res.statusCode == 200) {

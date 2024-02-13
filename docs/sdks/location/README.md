@@ -76,7 +76,16 @@ async function run() {
   });
 
   const res = await sdk.location.postLocation({
-    id: "<ID>",
+    address1: "LuhmenStr. 185",
+    address2: "c/o Test SE",
+    city: "Berlin",
+    id: "53f1e593-24d4-4110-8b2d-4e18d5461c33",
+    name: "berlin",
+    platformId: "4523",
+    postalCode: "10115",
+    region: "Berlin",
+    status: LocationStatus.Active,
+    type: LocationType.Warehouse,
   });
 
   if (res.statusCode == 200) {

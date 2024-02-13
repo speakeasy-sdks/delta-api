@@ -76,14 +76,34 @@ async function run() {
   });
 
   const res = await sdk.returns.postReturns({
+    carrier: "DHL",
+    connectionId: "71f133b0-7936-4c46-8905-df646095537a",
+    createdAt: "2023-02-09T00:00:00.000Z",
     id: "<ID>",
+    platformId: "2522",
+    quantity: 10,
     returnedOrders: [
       {
+        id: 45,
+        platformId: "2522",
         returnedItems: [
-          {},
+          {
+            barcode: "5901234123457",
+            condition: ReturnWithoutIdCondition.Used,
+            id: 53,
+            platformId: "a2235",
+            quantity: 1,
+            reason: "defective",
+            sku: "1234",
+            variantId: "z8889",
+          },
         ],
       },
     ],
+    shopperMessage: "defective",
+    status: ReturnWithoutIdStatus.Other,
+    trackingNumber: "A12356FG",
+    updatedAt: "2023-02-09T00:00:00.000Z",
   });
 
   if (res.statusCode == 200) {
