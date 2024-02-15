@@ -28,7 +28,7 @@ async function run() {
   });
 
   const res = await sdk.accounts.getAccountById({
-    accountId: "string",
+    accountId: "<value>",
   });
 
   if (res.statusCode == 200) {

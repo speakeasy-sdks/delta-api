@@ -39,7 +39,7 @@ async function run() {
     });
 
     const res = await sdk.accounts.getAccountById({
-        accountId: "string",
+        accountId: "<value>",
     });
 
     if (res.statusCode == 200) {
@@ -137,7 +137,7 @@ async function run() {
     let res;
     try {
         res = await sdk.accounts.getAccountById({
-            accountId: "string",
+            accountId: "<value>",
         });
     } catch (err) {
         if (err instanceof errors.ErrorT) {
@@ -188,7 +188,7 @@ async function run() {
     });
 
     const res = await sdk.accounts.getAccountById({
-        accountId: "string",
+        accountId: "<value>",
     });
 
     if (res.statusCode == 200) {
@@ -217,7 +217,7 @@ async function run() {
     });
 
     const res = await sdk.accounts.getAccountById({
-        accountId: "string",
+        accountId: "<value>",
     });
 
     if (res.statusCode == 200) {
@@ -278,7 +278,7 @@ async function run() {
     });
 
     const res = await sdk.accounts.getAccountById({
-        accountId: "string",
+        accountId: "<value>",
     });
 
     if (res.statusCode == 200) {

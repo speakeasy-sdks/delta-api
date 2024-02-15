@@ -29,7 +29,7 @@ async function run() {
   });
 
   const res = await sdk.products.getProductById({
-    productId: "string",
+    productId: "<value>",
   });
 
   if (res.statusCode == 200) {

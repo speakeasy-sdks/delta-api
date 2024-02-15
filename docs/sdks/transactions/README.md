@@ -28,7 +28,7 @@ async function run() {
   });
 
   const res = await sdk.transactions.getTransactionById({
-    transactionId: "string",
+    transactionId: "<value>",
   });
 
   if (res.statusCode == 200) {

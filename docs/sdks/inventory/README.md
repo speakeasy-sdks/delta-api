@@ -73,7 +73,7 @@ async function run() {
   });
 
   const res = await sdk.inventory.getInvetoryById({
-    inventoryId: "string",
+    inventoryId: "<value>",
   });
 
   if (res.statusCode == 200) {

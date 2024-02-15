@@ -72,7 +72,7 @@ async function run() {
   });
 
   const res = await sdk.journalEntries.getJournalEntryById({
-    id: "<ID>",
+    id: "<id>",
   });
 
   if (res.statusCode == 200) {

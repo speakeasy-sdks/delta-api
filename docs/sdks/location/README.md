@@ -28,7 +28,7 @@ async function run() {
   });
 
   const res = await sdk.location.getLocationById({
-    locationId: "string",
+    locationId: "<value>",
   });
 
   if (res.statusCode == 200) {

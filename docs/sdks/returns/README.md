@@ -28,7 +28,7 @@ async function run() {
   });
 
   const res = await sdk.returns.getReturnById({
-    returnId: "string",
+    returnId: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -79,7 +79,7 @@ async function run() {
     carrier: "DHL",
     connectionId: "71f133b0-7936-4c46-8905-df646095537a",
     createdAt: "2023-02-09T00:00:00.000Z",
-    id: "<ID>",
+    id: "<id>",
     platformId: "2522",
     quantity: 10,
     returnedOrders: [

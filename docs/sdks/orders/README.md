@@ -30,7 +30,7 @@ async function run() {
   });
 
   const res = await sdk.orders.getOrderById({
-    orderId: "string",
+    orderId: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -233,7 +233,7 @@ async function run() {
       unitWeight: "g",
       updatedAt: "2023-02-09T00:00:00.000Z",
     },
-    orderId: "string",
+    orderId: "<value>",
   });
 
   if (res.statusCode == 200) {
