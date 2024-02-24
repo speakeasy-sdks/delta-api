@@ -123,7 +123,7 @@ async function run() {
   const res = await sdk.products.postProducts({
     category: "home",
     connectionId: "123",
-    createdAt: "2023-02-09T00:00:00.000Z",
+    createdAt: "2023-02-09T00:00:00Z",
     description: "iron steal",
     id: "53f1e593-24d4-4110-8b2d-4e18d5461c33",
     media: [
@@ -132,7 +132,7 @@ async function run() {
     name: "mug",
     platformId: "a8883",
     status: "active",
-    updatedAt: "2023-02-09T00:00:00.000Z",
+    updatedAt: "2023-02-09T00:00:00Z",
     variants: [
       {
         customs: {
@@ -143,7 +143,7 @@ async function run() {
         barcode: "999234",
         carrier: "express ship",
         countryOfOrigin: "DE",
-        createdAt: "2023-02-09T00:00:00.000Z",
+        createdAt: "2023-02-09T00:00:00Z",
         deliveryTime: 20,
         deliveryType: "Same-Day",
         dimensions: {
@@ -184,7 +184,7 @@ async function run() {
         },
         totalStock: 2,
         unitType: ProductWithoutIdUnitType.Piece,
-        updatedAt: "2023-02-09T00:00:00.000Z",
+        updatedAt: "2023-02-09T00:00:00Z",
         variantId: "i277",
       },
     ],

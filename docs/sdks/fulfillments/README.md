@@ -77,7 +77,7 @@ async function run() {
 
   const res = await sdk.fulfillments.postFulfillments({
     carrier: "express ship",
-    createdAt: "2023-02-09T00:00:00.000Z",
+    createdAt: "2023-02-09T00:00:00Z",
     deliveryType: "express",
     id: "53f1e593-24d4-4110-8b2d-4e18d5461c33",
     isoCurrencyCode: "EUR",
@@ -103,7 +103,7 @@ async function run() {
     trackingNumber: "782833755",
     trackingUrl: "http://express-ship.com/782833755",
     unitWeight: UnitWeight.G,
-    updatedAt: "2023-02-09T00:00:00.000Z",
+    updatedAt: "2023-02-09T00:00:00Z",
     weight: 1000,
   });
 
