@@ -247,3 +247,13 @@ Based on:
 - [typescript v0.9.4] .
 ### Releases
 - [NPM v0.9.4] https://www.npmjs.com/package/delta/v/0.9.4 - .
+
+## 2024-02-27 00:58:56
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.194.0 (2.272.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.9.5] .
+### Releases
+- [NPM v0.9.5] https://www.npmjs.com/package/delta/v/0.9.5 - .
