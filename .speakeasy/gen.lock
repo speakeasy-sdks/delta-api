@@ -3,10 +3,10 @@ id: dfe6692d-0cec-4a35-a1ef-efa7dd06b734
 management:
   docChecksum: 0144fa487c5dc64a86bc992d5a8150cc
   docVersion: 1.0.0
-  speakeasyVersion: internal
-  generationVersion: 2.272.7
-  releaseVersion: 0.9.5
-  configChecksum: f9f40f16554870074e76e9c13fb13bcb
+  speakeasyVersion: 1.207.1
+  generationVersion: 2.280.6
+  releaseVersion: 0.9.6
+  configChecksum: a7afbb90dd22e90b51915dcf893f3c98
   repoURL: https://github.com/speakeasy-sdks/delta-api.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/delta-api
@@ -15,7 +15,7 @@ features:
   typescript:
     core: 3.4.8
     globalSecurity: 2.82.4
-    globalServerURLs: 2.82.1
+    globalServerURLs: 2.82.2
 generatedFiles:
   - src/sdk/accounts.ts
   - src/sdk/inventory.ts

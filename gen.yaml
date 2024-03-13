@@ -10,7 +10,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 typescript:
-  version: 0.9.5
+  version: 0.9.6
   author: delta technologies GmbH
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
